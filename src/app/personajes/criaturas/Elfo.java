@@ -1,5 +1,8 @@
 package app.personajes.criaturas;
 
-public class Elfo extends Criatura implements IHaceMagia, ILlevaReliquia{
+import app.IHaceMagia;
+import app.ILlevaReliquia;
+
+public class Elfo extends Criatura implements IHaceMagia, ILlevaReliquia {
 
 }

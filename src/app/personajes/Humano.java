@@ -1,4 +1,7 @@
-package app;
+package app.personajes;
+
+import app.ILlevaReliquia;
+
 /**
  * Humano
  */
