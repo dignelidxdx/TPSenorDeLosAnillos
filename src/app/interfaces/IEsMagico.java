@@ -1,4 +1,4 @@
-package app;
+package app.interfaces;
 
 public interface IEsMagico {
 
