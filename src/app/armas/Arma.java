@@ -1,4 +1,4 @@
-package app;
+package app.armas;
 
 public class Arma {
 
