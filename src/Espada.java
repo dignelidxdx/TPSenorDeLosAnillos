@@ -1,7 +1,0 @@
-/**
- * Espada
- */
-public class Espada {
-
-    
-}
