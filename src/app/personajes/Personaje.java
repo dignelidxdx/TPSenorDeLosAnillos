@@ -15,6 +15,14 @@ public class Personaje {
 
     private List<Arma> armas = new ArrayList<>();
 
+    public Personaje() {    }
+
+    public Personaje(String nombre, int salud, int stamina) {
+        this.nombre = nombre;
+        this.salud = salud;
+        this.stamina = stamina;
+    }
+
     public String getNombre() {
         return nombre;
     }
