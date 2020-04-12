@@ -50,7 +50,7 @@ public class Personaje {
         return false;
         
     }
-    public void atacar(Personaje personaje){
+    public void atacar(Personaje personaje, Arma arma){
         System.out.println("El personaje empezo a atacar");
     }
     
