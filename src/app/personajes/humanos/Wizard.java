@@ -1,10 +1,12 @@
-package app.personajes.criaturas;
+package app.personajes.humanos;
 
 import app.interfaces.IHaceMagia;
-import app.interfaces.ILlevaReliquia;
-import app.personajes.Criatura;
 
-public class Elfo extends Criatura implements IHaceMagia, ILlevaReliquia {
+public class Wizard extends Humano implements IHaceMagia {
+
+    public Wizard(){
+        this.energiaMagica = 100;    }
+
 
     private int energiaMagica;
 
