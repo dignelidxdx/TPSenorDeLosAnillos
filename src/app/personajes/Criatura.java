@@ -1,5 +1,4 @@
-package app.personajes.criaturas;
-
+package app.personajes;
 
 public class Criatura extends Personaje {
 

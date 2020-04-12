@@ -1,8 +1,5 @@
-package app;
-/**
- * Personaje
- */
+package app.personajes;
+
 public class Personaje {
 
-    
 }
