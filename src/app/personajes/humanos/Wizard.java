@@ -1,4 +1,4 @@
-package app.personajes;
+package app.personajes.humanos;
 
 import app.interfaces.IHaceMagia;
 

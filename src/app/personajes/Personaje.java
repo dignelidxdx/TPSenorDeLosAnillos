@@ -1,7 +1,9 @@
 package app.personajes;
+
 import java.util.ArrayList;
 import java.util.List;
 import app.armas.Arma;
+
 /**
  * Personaje
  */
@@ -11,7 +13,7 @@ public class Personaje {
     private int salud;
     private int stamina;
 
-    private List<Arma> armas = new ArrayList<>();   
+    private List<Arma> armas = new ArrayList<>();
 
     public String getNombre() {
         return nombre;
@@ -45,13 +47,26 @@ public class Personaje {
         this.armas = armas;
     }
 
-
-    public boolean estaVivo(){
+    public boolean estaVivo() {
         return false;
-        
+
     }
     public void atacar(Personaje personaje, Arma arma){
         System.out.println("El personaje empezo a atacar");
-    }
-    
 }
+
+}
+
+
+
+
+
+    
+
+     
+
+    
+
+    
+
+    

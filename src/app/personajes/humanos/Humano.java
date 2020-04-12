@@ -1,11 +1,8 @@
-package app.personajes;
+package app.personajes.humanos;
 
 import app.interfaces.ILlevaReliquia;
+import app.personajes.Personaje;
 
-/**
- * Humano
- */
 public class Humano extends Personaje implements ILlevaReliquia {
-
 
 }
