@@ -7,5 +7,5 @@ import app.interfaces.ILlevaReliquia;
  */
 public class Humano extends Personaje implements ILlevaReliquia {
 
-    
+
 }
