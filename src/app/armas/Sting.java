@@ -1,5 +1,12 @@
 package app.armas;
 
-public class Sting {
+import app.interfaces.IEsMagico;
+
+public class Sting extends Espada implements IEsMagico{
+
+    public Sting(String nombre, int danio, int stamina) {
+        super(nombre, danio, stamina);
+        // TODO Auto-generated constructor stub
+    }
 
 }
