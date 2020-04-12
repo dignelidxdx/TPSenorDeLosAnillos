@@ -4,7 +4,7 @@ import app.interfaces.ILlevaReliquia;
 import app.reliquias.Reliquia;
 
 
-public class Hobbit extends Criatura implements ILlevaReliquia {
+public class Hobbit extends Criatura implements app.interfaces.ILlevaReliquia {
 
     private Reliquia reliquia;
 

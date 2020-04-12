@@ -1,5 +1,13 @@
 package app.armas;
 
-public class Baculo {
+import app.interfaces.IEsMagico;
+
+public class Baculo extends Arma implements IEsMagico{
+
+    public Baculo(String nombre, int danio, int stamina) {
+        super(nombre, danio, stamina);
+    }
+
+   
 
 }
