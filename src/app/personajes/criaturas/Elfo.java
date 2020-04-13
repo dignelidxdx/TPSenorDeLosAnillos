@@ -15,7 +15,6 @@ public class Elfo extends Criatura implements IHaceMagia, ILlevaReliquia {
         
     }
 
-
     public Elfo(String nombre, int salud, int stamina) {
         super(nombre, salud, stamina);
         
@@ -25,6 +24,11 @@ public class Elfo extends Criatura implements IHaceMagia, ILlevaReliquia {
         super(nombre, salud, stamina);
         this.energiaMagica = energiaMagica;
         this.reliquia = reliquia;
+    }
+
+    public Elfo(String nombre, int salud, int stamina, int energiaMagica) {
+        super(nombre, salud, stamina);
+        this.energiaMagica = energiaMagica;
     }
 
     public int getEnergiaMagica() {

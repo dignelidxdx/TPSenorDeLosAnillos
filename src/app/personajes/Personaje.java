@@ -19,7 +19,7 @@ public class Personaje {
 
     public Personaje(String nombre, int salud, int stamina) {
         this.nombre = nombre;
-        this.salud = salud;
+        this.salud = 100;
         this.stamina = stamina;
     }
 
@@ -61,7 +61,7 @@ public class Personaje {
     }
     public void atacar(Personaje personaje, Arma arma){
         System.out.println("El personaje empezo a atacar");
-}
+    }
 
 }
 
