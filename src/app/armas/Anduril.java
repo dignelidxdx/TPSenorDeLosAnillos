@@ -1,9 +1,12 @@
-package app.reliquias.reliquias_joyas;
+package app.armas;
 
 import app.interfaces.IEsMagico;
-import app.reliquias.Reliquia;
 
-public class FrascoGaladriel extends Reliquia implements IEsMagico {
+public class Anduril extends Espada implements IEsMagico {
+
+    public Anduril(String nombre, int danio, int stamina) {
+        super(nombre, danio, stamina);
+    }
 
     @Override
     public int getEnergiaMagica() {
@@ -16,5 +19,8 @@ public class FrascoGaladriel extends Reliquia implements IEsMagico {
         // TODO Auto-generated method stub
 
     }
+
+    
+    
 
 }

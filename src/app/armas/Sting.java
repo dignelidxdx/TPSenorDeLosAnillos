@@ -1,9 +1,12 @@
-package app.reliquias.reliquias_joyas;
+package app.armas;
 
 import app.interfaces.IEsMagico;
-import app.reliquias.Reliquia;
 
-public class FrascoGaladriel extends Reliquia implements IEsMagico {
+public class Sting extends Espada implements IEsMagico{
+
+    public Sting(String nombre, int danio, int stamina) {
+        super(nombre, danio, stamina);
+    }
 
     @Override
     public int getEnergiaMagica() {

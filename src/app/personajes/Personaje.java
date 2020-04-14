@@ -15,6 +15,14 @@ public class Personaje {
 
     private List<Arma> armas = new ArrayList<>();
 
+    public Personaje() {    }
+
+    public Personaje(String nombre, int salud, int stamina) {
+        this.nombre = nombre;
+        this.salud = 100;
+        this.stamina = stamina;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -51,10 +59,9 @@ public class Personaje {
         return false;
 
     }
-
-    public void atacar(Personaje personaje) {
+    public void atacar(Personaje personaje, Arma arma){
         System.out.println("El personaje empezo a atacar");
-}
+    }
 
 }
 
