@@ -5,16 +5,21 @@ import app.reliquias.Reliquia;
 
 public class AnilloDePoder extends Reliquia implements IEsMagico {
 
-    @Override
+    //**Constructor */
+
+    public AnilloDePoder(String nombre, double factorDeAtaque, double factorDeDefensa, int energiaMagica) {
+        super(nombre, factorDeAtaque, factorDeDefensa);
+        this.energiaMagica = energiaMagica;
+    }
+
+    //Atributo, getter y setter
+    
+    private int energiaMagica;
     public int getEnergiaMagica() {
-        // TODO Auto-generated method stub
-        return 0;
+        return energiaMagica;
     }
 
-    @Override
     public void setEnergiaMagica(int energiaMagica) {
-        // TODO Auto-generated method stub
-
+        this.energiaMagica = energiaMagica;
     }
-
 }
