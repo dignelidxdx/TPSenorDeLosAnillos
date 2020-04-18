@@ -1,5 +1,8 @@
 package app.personajes.criaturas;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import app.personajes.Personaje;
 
 public class Criatura extends Personaje {
@@ -11,5 +14,10 @@ public class Criatura extends Personaje {
     public Criatura(String nombre, int salud, int stamina) {
         super(nombre, salud, stamina);
     }
+
+    // public List<Elfo> personajesElficos = new ArrayList<Elfo>();
+    // public static List<Criatura> personajesCriaturas = Criatura.GetCriaturasExistentes();
+
+    // public static List<Criatura> GetCriaturasExistentes() {    }
 
 }

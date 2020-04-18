@@ -18,8 +18,8 @@ public class AnilloNenya extends AnilloElfico {
         this.danioHielo = danioHielo;
     }
 
-    private int ataqueEPICO;
-    public int getAtaqueEPICO() {
+    private double ataqueEPICO;
+    public double getAtaqueEPICO() {
         return ataqueEPICO;
     }
 
@@ -27,7 +27,7 @@ public class AnilloNenya extends AnilloElfico {
         this.ataqueEPICO = ataqueEPICO;
     }
 
-    public boolean escarcha(int danioHielo) {
+    public int escarcha(int danioHielo) {
         
         if (AnilloNenya Nenya == 1) {
             
@@ -35,7 +35,7 @@ public class AnilloNenya extends AnilloElfico {
 
                 for(int contadorTurno = 0; contadorTurno >= 0; contadorTurno++) {
 
-                    Contrincante contrincante getEstamina() = Contrincante contrincante getEstamina() - this.danioHielo;
+                    return Contrincante contrincante getEstamina() = Contrincante contrincante getEstamina() - this.danioHielo;
                 }
 
             }
@@ -44,17 +44,15 @@ public class AnilloNenya extends AnilloElfico {
 
     }
 
-    public boolean invocacionUlmo(int ataqueEPICO) {
+    public double invocacionUlmo(int ataqueEPICO) {
 
         if (AnilloNenya Nenya == 1) {
 
-            while (boolean estaVivo() == true) {
+            while (estaVivo() == true) {
 
                 if (getSalud() <= (getSalud() * 0.15) {
 
-                    System.out.println("Tus lágrimas de dolor y desesperanza conmueven el corazón de Ulmo,\n quien desata un raudo alud que arrastra a tu vil enemigo, lo ahoga con lodo y \n lo magulla con los detritos que acarrea; provocandole un daño masivo");
-
-                    this.ataqueEPICO = Contrincante contrincante getSalud() - (Contrincante contrincante getSalud() * 0.70);
+                    return this.ataqueEPICO = Contrincante contrincante getSalud() - (Contrincante contrincante getSalud() * 0.70);
                 }
             }
         }
