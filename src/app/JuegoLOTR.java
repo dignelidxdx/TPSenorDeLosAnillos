@@ -127,8 +127,6 @@ public class JuegoLOTR {
 
     public ArrayList<Personaje> personajesSeleccionados = new ArrayList<>();
 
-<<<<<<< HEAD
-=======
     public static ArrayList<Personaje> listaPersonajes() {
 
 		ArrayList<Personaje> personajes = new ArrayList<>();
@@ -275,4 +273,3 @@ public class JuegoLOTR {
     }
 
 }
->>>>>>> a7d140a884809209df9dde881401dc2273324dbe

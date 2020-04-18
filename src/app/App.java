@@ -11,15 +11,11 @@ public class App {
     
     public static void main(String[] args) throws Exception {
 
-<<<<<<< HEAD
 
 
         
   
 
-=======
-        menuInicializacion();       
->>>>>>> a7d140a884809209df9dde881401dc2273324dbe
         
     }
 
