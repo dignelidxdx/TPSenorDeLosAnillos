@@ -14,12 +14,12 @@ public class Humano extends Personaje implements ILlevaReliquia {
     public Humano(String nombre, int salud, int stamina, Reliquia reliquia) {
         super(nombre, salud, stamina);
         this.reliquia = reliquia;
-
     }  
-
     public Humano(String nombre, int salud, int stamina) {
-        super(nombre, salud, stamina);
-        
+        super(nombre, salud, stamina);        
+    }  
+    public Humano(String nombre, int stamina) {
+        super(nombre, stamina);        
     }  
 
     public Reliquia getReliquia() {
@@ -29,5 +29,13 @@ public class Humano extends Personaje implements ILlevaReliquia {
     public void setReliquia(Reliquia reliquia) {
         this.reliquia = reliquia;
     }
+
+    public void regeneracionVida(Humano personaje) {
+        int regVida = personaje.getSalud() + 8; 
+        personaje.setSalud(regVida);
+    }
+
+
+
     
 }

@@ -10,17 +10,21 @@ public class Wizard extends Humano implements IHaceMagia {
     private int energiaMagica;
     
     public Wizard() {
-        this.energiaMagica = 100;
+        this.setSalud(70);
+        this.setEnergiaMagica(90);
     }
 
     public Wizard(String nombre, int salud, int stamina, Reliquia reliquia, int energiaMagica) {
         super(nombre, salud, stamina, reliquia);
-        this.energiaMagica = 100;
+        this.setEnergiaMagica(90);
     }
-    public Wizard(String nombre, int salud, int stamina, int energiaMagica) {
-        super(nombre, salud, stamina);
-        this.energiaMagica = 100;
+    public Wizard(String nombre, int stamina) {
+        super(nombre, stamina);
+        super.setSalud(70);
+        this.setEnergiaMagica(90);
     }
+    
+
     
     public int getEnergiaMagica() {
         return energiaMagica;
@@ -38,7 +42,13 @@ public class Wizard extends Humano implements IHaceMagia {
 
     @Override
     public void ataqueEpico(Personaje personaje, Arma arma) {
-        // TODO Auto-generated method stub
+
+        int vidaActual = 0;
+        vidaActual = personaje.getSalud() - arma.getDanio() -10; 
+        personaje.setSalud(vidaActual);
+
+        System.out.println("Ejecute un ataque epico a: " + personaje.getNombre() + " y quedo con vida: " 
+        + personaje.getSalud());
 
     }
 }

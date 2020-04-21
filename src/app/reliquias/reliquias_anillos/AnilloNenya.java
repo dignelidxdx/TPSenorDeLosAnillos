@@ -5,7 +5,7 @@ public class AnilloNenya extends AnilloElfico {
     public AnilloNenya(String nombre, double factorDeAtaque, double factorDeDefensa, int energiaMagica) {
         super(nombre, factorDeAtaque, factorDeDefensa, energiaMagica);
         this.setDanioHielo(12);
-        this.invocacionUlmo(ataqueEPICO);
+        // this.invocacionUlmo(ataqueEPICO);
     }
 
     private int danioHielo;
@@ -27,38 +27,38 @@ public class AnilloNenya extends AnilloElfico {
         this.ataqueEPICO = ataqueEPICO;
     }
 
-    public boolean escarcha(int danioHielo) {
+    // public boolean escarcha(int danioHielo) {
         
-        if (AnilloNenya Nenya == 1) {
+    //     if (AnilloNenya Nenya == 1) {
             
-            while (boolean estaVivo() == true) {
+    //         while (boolean estaVivo() == true) {
 
-                for(int contadorTurno = 0; contadorTurno >= 0; contadorTurno++) {
+    //             for(int contadorTurno = 0; contadorTurno >= 0; contadorTurno++) {
 
-                    Contrincante contrincante getEstamina() = Contrincante contrincante getEstamina() - this.danioHielo;
-                }
+    //                 Contrincante contrincante getEstamina() = Contrincante contrincante getEstamina() - this.danioHielo;
+    //             }
 
-            }
+    //         }
 
-        } else {}
+    //     } else {}
 
-    }
+    // }
 
-    public boolean invocacionUlmo(int ataqueEPICO) {
+    // public boolean invocacionUlmo(int ataqueEPICO) {
 
-        if (AnilloNenya Nenya == 1) {
+    //     if (AnilloNenya Nenya == 1) {
 
-            while (boolean estaVivo() == true) {
+    //         while (boolean estaVivo() == true) {
 
-                if (getSalud() <= (getSalud() * 0.15) {
+    //             if (getSalud() <= (getSalud() * 0.15) {
 
-                    System.out.println("Tus lágrimas de dolor y desesperanza conmueven el corazón de Ulmo,\n quien desata un raudo alud que arrastra a tu vil enemigo, lo ahoga con lodo y \n lo magulla con los detritos que acarrea; provocandole un daño masivo");
+    //                 System.out.println("Tus lágrimas de dolor y desesperanza conmueven el corazón de Ulmo,\n quien desata un raudo alud que arrastra a tu vil enemigo, lo ahoga con lodo y \n lo magulla con los detritos que acarrea; provocandole un daño masivo");
 
-                    this.ataqueEPICO = Contrincante contrincante getSalud() - (Contrincante contrincante getSalud() * 0.70);
-                }
-            }
-        }
+    //                 this.ataqueEPICO = Contrincante contrincante getSalud() - (Contrincante contrincante getSalud() * 0.70);
+    //             }
+    //         }
+    //     }
 
 
-    }
+    // }
 }
