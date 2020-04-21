@@ -7,9 +7,13 @@ public class AnilloDePoder extends Reliquia implements IEsMagico {
 
     //**Constructor */
 
+    public AnilloDePoder() {
+        
+    }
+
     public AnilloDePoder(String nombre, double factorDeAtaque, double factorDeDefensa, int energiaMagica) {
         super(nombre, factorDeAtaque, factorDeDefensa);
-        this.energiaMagica = energiaMagica;
+        this.setEnergiaMagica(energiaMagica);
     }
 
     //Atributo, getter y setter
@@ -20,6 +24,6 @@ public class AnilloDePoder extends Reliquia implements IEsMagico {
     }
 
     public void setEnergiaMagica(int energiaMagica) {
-        this.energiaMagica = energiaMagica;
+        this.energiaMagica = 20;
     }
 }

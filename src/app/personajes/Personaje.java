@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import app.armas.Arma;
 
+
 /**
  * Personaje
  */

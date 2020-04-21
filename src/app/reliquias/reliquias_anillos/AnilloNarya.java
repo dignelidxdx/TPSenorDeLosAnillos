@@ -1,6 +1,11 @@
 package app.reliquias.reliquias_anillos;
 
+
 public class AnilloNarya extends AnilloElfico {
+
+    public AnilloNarya() {
+        this.setDanioFuego(6);
+    }
 
     public AnilloNarya(String nombre, double factorDeAtaque, double factorDeDefensa, int energiaMagica) {
         super(nombre, factorDeAtaque, factorDeDefensa, energiaMagica);
@@ -17,15 +22,14 @@ public class AnilloNarya extends AnilloElfico {
         this.danioFuego = danioFuego;
     }
 
+    
+
     public boolean quemadura(int danioFuego) {
         if (AnilloNarya Narya == 1) {
             
-            while (boolean estaVivo()) {
-                for(int contadorTurno = 0; contadorTurno >= 0; contadorTurno++) {
-
-                    Contrincante contrincante getSalud() = Contrincante contrincante getSalud() - this.danioFuego;
-                }
-            }
+           atacado.getSalud() -= this.danioFuego;
+                
+            
         } else {}
     }
 

@@ -1,11 +1,18 @@
 package app.reliquias.reliquias_anillos;
 
+import app.interfaces.ILlevaReliquia;
+import app.personajes.Personaje;
+
 public class AnilloNenya extends AnilloElfico {
+
+    public AnilloNenya() {
+        
+    }
 
     public AnilloNenya(String nombre, double factorDeAtaque, double factorDeDefensa, int energiaMagica) {
         super(nombre, factorDeAtaque, factorDeDefensa, energiaMagica);
-        this.setDanioHielo(12);
-        this.invocacionUlmo(ataqueEPICO);
+        this.setDanioHielo(danioHielo);
+        
     }
 
     private int danioHielo;
@@ -15,7 +22,7 @@ public class AnilloNenya extends AnilloElfico {
     }
 
     public void setDanioHielo(int danioHielo){
-        this.danioHielo = danioHielo;
+        this.danioHielo = 8;
     }
 
     private double ataqueEPICO;
@@ -27,33 +34,27 @@ public class AnilloNenya extends AnilloElfico {
         this.ataqueEPICO = ataqueEPICO;
     }
 
-    public int escarcha(int danioHielo) {
-        
-        if (AnilloNenya Nenya == 1) {
-            
-            while (boolean estaVivo() == true) {
+    public void escarcha(Personaje atacado) {
 
-                for(int contadorTurno = 0; contadorTurno >= 0; contadorTurno++) {
+        int danioStamima = atacado.getStamina() - this.getDanioHielo();
 
-                    return Contrincante contrincante getEstamina() = Contrincante contrincante getEstamina() - this.danioHielo;
-                }
+        atacado.setStamina(danioStamima);
 
-            }
-
-        } else {}
 
     }
 
-    public double invocacionUlmo(int ataqueEPICO) {
 
-        if (AnilloNenya Nenya == 1) {
+    public void invocacionUlmo(Personaje atacado, Personaje atacante) {
 
-            while (estaVivo() == true) {
+        if (atacante instanceof ILlevaReliquia && atacante.reliquia.nombre.equals("Anillo Nenya")) {
 
-                if (getSalud() <= (getSalud() * 0.15) {
+            if ((atacante.estaVivo() && atacado.estaVivo()) && (atacante.getSalud() <= atacante.getSalud() * 0.15)) {
 
-                    return this.ataqueEPICO = Contrincante contrincante getSalud() - (Contrincante contrincante getSalud() * 0.70);
-                }
+               
+                ataqueEPICO = atacado.getSalud() - (atacado.getSalud() * 0.70);
+
+                atacado.setSalud((int)ataqueEPICO);
+            
             }
         }
 

@@ -1,5 +1,8 @@
 package app.reliquias;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Reliquia {
 
     /** Constructores */
@@ -14,6 +17,8 @@ public class Reliquia {
         this.factorDeAtaque = factorDeAtaque;
         this.factorDeDefensa = factorDeDefensa;
     }
+
+    
 
     //atributos con getters y setters
 
