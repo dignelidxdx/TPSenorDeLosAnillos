@@ -244,9 +244,85 @@ public class JuegoLOTR {
                 
     }
 
-	public void iniciarCombateConCPU(Personaje player1, Personaje cpuBot) {
+	public void iniciarCombateContraCPU(Personaje player, Personaje cpuBot) {
 
-    }
+        System.out.println("Inicia el combate contra Bot");  
+        int turno = 1;
+        Personaje ganadorCombate;
+
+        if(player instanceof ILlevaReliquia) {
+
+            Reliquia soyReliquia2 = new AnilloNarya("soyAnillo", 0.15, 0.30, 1);
+            ((ILlevaReliquia) player).setReliquia(soyReliquia2);
+
+        }
+
+        while(player.estaVivo() && cpuBot.estaVivo()){
+            
+            if(turno == 1){
+
+
+                System.out.println();
+                System.out.println("Selecciona una arma " + player.getNombre() + " para usar:");
+                System.out.println();
+                for (int i = 0; i < armas.size(); i++) {
+                    System.out.println(i+1 + ". " + armas.get(i).getNombre() + " Con danio de: " + armas.get(i).getDanio());
+                }
+                int respuesta = Teclado.nextInt();
+                Arma armaActual;
+                armaActual = armas.get(respuesta-1);  
+
+                if(player instanceof IHaceMagia && player instanceof ILlevaReliquia){
+                    System.out.println("Hola soy Elfo o Wizard");
+                    //entran los Elfos y Wizard nada mas
+                    if(((ILlevaReliquia) player).getReliquia() instanceof IEsMagico && ((ILlevaReliquia) player).getReliquia() instanceof AnilloElfico && armaActual instanceof IEsMagico){
+                        System.out.println("Soy un elfo con anillo elfico");
+                        usoAtaqueEpico(player, cpuBot, armaActual);
+                    } else player.atacar(cpuBot, armaActual, player);
+
+                } else if(player instanceof ILlevaReliquia) {
+                    System.out.println("Soy un personaje con reliquia");
+                    player.atacar(cpuBot, armaActual, player);
+                    //entran los Humanos y los Hobbit
+
+                } else if (player.getStamina() > armaActual.getStamina()) {
+                    //entran los demas personajes Enano, Troll, Orco, Goblin que tengan stamina.
+                    
+                    player.atacar(cpuBot, armaActual, player);
+                    System.out.println("Soy: " + player.getNombre() + "Ataque a: " + cpuBot.getNombre());
+                    System.out.println("Quedo con vida: " + cpuBot.getSalud());
+                } else if (player.getStamina() < armaActual.getStamina()) {
+                    //entran los demas personajes Enano, Troll, Orco, Goblin para usar posion de stamina.
+
+                    player.usarPosionStamina(player);
+                    System.out.println("Me cure estamina" + player.getNombre());
+                } 
+
+                turno = 0;
+            } else if(turno == 0){
+                Arma armaActual;
+                Random random = new Random();
+                int posicionRandom = random.nextInt(armas.size()) + 1;
+                armaActual = armas.get(posicionRandom);
+
+                cpuBot.atacar(player, armaActual, cpuBot);
+
+                System.out.println("Deje a: " + player.getNombre() + " con vida: " + player.getSalud());
+
+                turno = 1; 
+            }
+
+        }
+
+        if(player.getSalud() > 0){
+            ganadorCombate = player;
+        } else{
+            ganadorCombate = cpuBot;
+        }
+        ganadorDelCombate(ganadorCombate);
+   
+
+	}
        
 
 }

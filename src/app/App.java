@@ -49,7 +49,7 @@ public class App {
                     
                     break;            
                 default:
-                System.out.println("Elije una opcion!");
+                System.out.println("Elige una opcion!");
                     break;
             }
 
@@ -88,7 +88,7 @@ public class App {
 
             System.out.println("El cpu eligio: " + cpuBot.getNombre());
 
-            juego.iniciarCombateConCPU(player1, cpuBot);
+            juego.iniciarCombateContraCPU(player1, cpuBot);
             salir = 0;
             
 
