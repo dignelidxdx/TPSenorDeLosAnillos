@@ -1,5 +1,4 @@
 package app;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -44,12 +43,35 @@ public class JuegoLOTR {
 
 
     public static ArrayList<Reliquia> listaReliquias() {
-
         ArrayList<Reliquia> reliquias = new ArrayList<>();
 
-        
-
         return reliquias;
+    }
+
+    public static ArrayList<Arma> listaArmas() {
+
+        ArrayList<Arma> armas = new ArrayList<>();
+    
+        Arma anduril = new Arma("Espada Anduril Magica", 550, -480);
+        armas.add(anduril);
+
+        Arma arcoFlecha = new Arma("Arco y flecha", 140, -89);
+        armas.add(arcoFlecha);
+
+        Arma espada = new Arma("Espada Comun", 200, -180);
+        armas.add(espada);
+
+        Arma baculo = new Arma("Baculo Magico", 680, -500);
+        armas.add(baculo);
+
+        Arma hachaDoble = new Arma("Hacha doble", 220, -190);
+        armas.add(hachaDoble);
+
+        Arma sting = new Arma("Sting Espada Magica", 350, -250);
+        armas.add(sting);
+
+        return armas;
+    
     }
 
         
@@ -117,15 +139,7 @@ public class JuegoLOTR {
 		return personajes;
     }
     
-    public static ArrayList<Arma> listaArmas() { 
-
-        ArrayList<Arma> armas = new ArrayList<>();
-       
-        Arma arma1 = new Anduril("Anduril Oxidado", 30, 20);
-        armas.add(arma1);
-
-        return armas;
-    }
+    
 
     public Personaje buscarPersonaje(String nombre){
         for (Personaje p: this.personajes) {
