@@ -19,12 +19,8 @@ public class App {
     public static final String ANSI_WHITE = "\u001B[37m";
     
     public static void main(String[] args) throws Exception {
-
-
-
         
-  
-
+        menuInicializacion();
         
     }
 
