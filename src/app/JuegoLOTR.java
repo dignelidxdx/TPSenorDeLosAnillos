@@ -1,12 +1,16 @@
 package app;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 import app.armas.Anduril;
+import app.armas.ArcoYFlecha;
 import app.armas.Arma;
+import app.armas.Baculo;
 import app.armas.Espada;
+import app.armas.HachaDoble;
 import app.armas.Sting;
 import app.interfaces.IEsMagico;
 import app.interfaces.IHaceMagia;
@@ -52,22 +56,22 @@ public class JuegoLOTR {
 
         ArrayList<Arma> armas = new ArrayList<>();
     
-        Arma anduril = new Arma("Espada Anduril Magica", 550, -480);
+        Arma anduril = new Anduril("Espada Anduril Magica", 40, 30);
         armas.add(anduril);
 
-        Arma arcoFlecha = new Arma("Arco y flecha", 140, -89);
+        Arma arcoFlecha = new ArcoYFlecha("Arco y Flecha", 35, 20);
         armas.add(arcoFlecha);
 
-        Arma espada = new Arma("Espada Comun", 200, -180);
+        Arma espada = new Espada("Espada Comun", 33, 25);
         armas.add(espada);
 
-        Arma baculo = new Arma("Baculo Magico", 680, -500);
+        Arma baculo = new Baculo("Baculo Magico", 34, 22);
         armas.add(baculo);
 
-        Arma hachaDoble = new Arma("Hacha doble", 220, -190);
+        Arma hachaDoble = new HachaDoble("Hacha doble", 33, 24);
         armas.add(hachaDoble);
 
-        Arma sting = new Arma("Sting Espada Magica", 350, -250);
+        Arma sting = new Sting("Sting Espada Magica", 34, 25);
         armas.add(sting);
 
         return armas;
@@ -85,8 +89,7 @@ public class JuegoLOTR {
         Humano humano2 = new Humano("Aragorn", 100, 100);
         personajes.add(humano2);
 
-        Humano humano3 = new Humano("Enethor II", 100, 100);
-        
+        Humano humano3 = new Humano("Enethor II", 100, 100);       
         personajes.add(humano3);
 
         Wizard wizard1 = new Wizard();
@@ -187,7 +190,7 @@ public class JuegoLOTR {
                 usoAtaqueEpico(atacante, atacado, armaActual);
             }             
             else if (atacante.getStamina() > armaActual.getStamina()) {
-                atacante.atacar(atacado, armaActual, atacante);
+                atacante.atacar(atacado, armaActual);
             } else if (atacante.getStamina() < armaActual.getStamina()) {
                 atacante.usarPosionStamina(atacante);
             }                        
@@ -278,18 +281,18 @@ public class JuegoLOTR {
                     if(((ILlevaReliquia) player).getReliquia() instanceof IEsMagico && ((ILlevaReliquia) player).getReliquia() instanceof AnilloElfico && armaActual instanceof IEsMagico){
                         System.out.println("Soy un elfo con anillo elfico");
                         usoAtaqueEpico(player, cpuBot, armaActual);
-                    } else player.atacar(cpuBot, armaActual, player);
+                    } else player.atacar(cpuBot, armaActual);
 
                 } else if(player instanceof ILlevaReliquia) {
                     System.out.println("Soy un personaje con reliquia");
-                    player.atacar(cpuBot, armaActual, player);
+                    player.atacar(cpuBot, armaActual);
                     //entran los Humanos y los Hobbit
 
                 } else if (player.getStamina() > armaActual.getStamina()) {
                     //entran los demas personajes Enano, Troll, Orco, Goblin que tengan stamina.
                     
-                    player.atacar(cpuBot, armaActual, player);
-                    System.out.println("Soy: " + player.getNombre() + "Ataque a: " + cpuBot.getNombre());
+                    player.atacar(cpuBot, armaActual);
+                    System.out.println(ANSI_PURPLE + "Soy: " + player.getNombre() + "Ataque a: " + cpuBot.getNombre() + ANSI_RESET);
                     System.out.println("Quedo con vida: " + cpuBot.getSalud());
                 } else if (player.getStamina() < armaActual.getStamina()) {
                     //entran los demas personajes Enano, Troll, Orco, Goblin para usar posion de stamina.
@@ -305,9 +308,9 @@ public class JuegoLOTR {
                 int posicionRandom = random.nextInt(armas.size()) + 1;
                 armaActual = armas.get(posicionRandom);
 
-                cpuBot.atacar(player, armaActual, cpuBot);
+                cpuBot.atacar(player, armaActual);
 
-                System.out.println("Deje a: " + player.getNombre() + " con vida: " + player.getSalud());
+                System.out.println(ANSI_GREEN + "Deje a: " + player.getNombre() + " con vida: " + player.getSalud() + ANSI_RESET);
 
                 turno = 1; 
             }

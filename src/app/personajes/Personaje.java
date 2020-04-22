@@ -93,9 +93,9 @@ public class Personaje {
         return true;
     }
 
-    public void atacar(Personaje atacado, Arma armaAtacante, Personaje atacante) {
+    public void atacar(Personaje atacado, Arma armaAtacante) {
        
-        if(atacante.getStamina() > armaAtacante.getStamina()){
+        if(this.getStamina() > armaAtacante.getStamina()){
 
             int vidaActual = 0;
 
@@ -104,10 +104,10 @@ public class Personaje {
 
             int staminaAtacante = 0;
 
-            staminaAtacante = atacante.getStamina() - armaAtacante.getStamina();
-            atacante.setStamina(staminaAtacante);
+            staminaAtacante = this.getStamina() - armaAtacante.getStamina();
+            this.setStamina(staminaAtacante);
 
-        } else usarPosion(atacante);         
+        } else usarPosion(this);         
 
     }
 
@@ -116,6 +116,7 @@ public class Personaje {
         int regVida = personaje.getSalud() + 5; 
         personaje.setSalud(regVida);
     }
+
     public void regeneracionStamina(Personaje personaje) {
         int regStamina = personaje.getStamina() + 5; 
         personaje.setStamina(regStamina);
