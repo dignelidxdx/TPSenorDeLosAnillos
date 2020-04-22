@@ -22,6 +22,7 @@ public class Personaje {
     private int stamina;
     private int defensa;
     private boolean seleccionado;
+    private Arma llevaArma;
 
     private List<Arma> armas = new ArrayList<>();
 
@@ -112,19 +113,19 @@ public class Personaje {
     }
 
    
-    public void regeneracionVida(Personaje personaje) {
-        int regVida = personaje.getSalud() + 5; 
-        personaje.setSalud(regVida);
+    public void regeneracionVida() {
+        int regVida = this.getSalud() + 5; 
+        this.setSalud(regVida);
     }
 
-    public void regeneracionStamina(Personaje personaje) {
-        int regStamina = personaje.getStamina() + 5; 
-        personaje.setStamina(regStamina);
+    public void regeneracionStamina() {
+        int regStamina = this.getStamina() + 5; 
+        this.setStamina(regStamina);
     }
 
-	public void usarRevivir(Personaje atacado) {
-        int vidaxCurar = atacado.getSalud() + 15;
-        atacado.setSalud(vidaxCurar);
+	public void usarRevivir() {
+        int vidaxCurar = (int) (this.getSalud() + 20);
+        this.setSalud(vidaxCurar);
     }
     
     public void usarPosionStamina(Personaje atacante) {

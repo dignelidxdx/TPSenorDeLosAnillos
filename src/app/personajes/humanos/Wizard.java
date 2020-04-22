@@ -4,6 +4,7 @@ import app.armas.Arma;
 import app.interfaces.IHaceMagia;
 import app.personajes.Personaje;
 import app.reliquias.Reliquia;
+import app.reliquias.reliquias_anillos.AnilloNarya;
 
 public class Wizard extends Humano implements IHaceMagia {
 
@@ -11,7 +12,7 @@ public class Wizard extends Humano implements IHaceMagia {
     
     public Wizard() {
         this.setSalud(70);
-        this.setEnergiaMagica(90);
+        this.setEnergiaMagica(25);
     }
 
     public Wizard(String nombre, int salud, int stamina, Reliquia reliquia, int energiaMagica) {
@@ -21,10 +22,8 @@ public class Wizard extends Humano implements IHaceMagia {
     public Wizard(String nombre, int stamina) {
         super(nombre, stamina);
         super.setSalud(70);
-        this.setEnergiaMagica(90);
+        this.setEnergiaMagica(25);
     }
-    
-
     
     public int getEnergiaMagica() {
         return energiaMagica;
@@ -37,18 +36,46 @@ public class Wizard extends Humano implements IHaceMagia {
     @Override
     public boolean puedoEjecutarAtaqueEpico() {
         // TODO Auto-generated method stub
-        return false;
+        if(this.getStamina() > 10 && this.getEnergiaMagica() > 5) {
+            return true;
+        } else return false;      
+    }
+
+    int cont = 2;
+
+    public void usarRevivir() {
+        
+        if(cont > 0) {
+            int vidaxCurar = (int) (this.getSalud() + 15);
+            this.setSalud(vidaxCurar);
+            cont--;
+        } else System.out.println("Uhh ya no tienes revivir!");
+        
     }
 
     @Override
     public void ataqueEpico(Personaje personaje, Arma arma) {
 
-        int vidaActual = 0;
-        vidaActual = personaje.getSalud() - arma.getDanio() -10; 
-        personaje.setSalud(vidaActual);
+        if(puedoEjecutarAtaqueEpico()) {        
+         
+            int vidaActual = 0;
+            vidaActual = (int) (personaje.getSalud()
+                    - (arma.getDanio() * (this.getReliquia().getFactorDeAtaque() + 1)));
+            personaje.setSalud(vidaActual);
 
-        System.out.println("Ejecute un ataque epico a: " + personaje.getNombre() + " y quedo con vida: " 
-        + personaje.getSalud());
+            int staminaRestante = this.getStamina() - 10;
+            this.setStamina(staminaRestante);
 
+            int magiaRestante = this.getEnergiaMagica() - 5;
+            this.setEnergiaMagica(magiaRestante);
+
+            System.out.println("Ejecute un ataque epico a: " + personaje.getNombre() + " y quedo con vida: " 
+            + personaje.getSalud() + " Soy un wizard feliz");
+
+        } else System.out.println("Uhh no tienes magia o stamina!!");
     }
+    
+
+
+
 }

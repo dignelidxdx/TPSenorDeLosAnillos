@@ -35,7 +35,9 @@ public class Humano extends Personaje implements ILlevaReliquia {
         personaje.setSalud(regVida);
     }
 
-
+    public void usarRevivir() {
+        
+    }
 
     
 }
