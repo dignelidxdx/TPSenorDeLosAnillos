@@ -4,7 +4,7 @@ import app.interfaces.IEsMagico;
 
 public class Sting extends Espada implements IEsMagico{
 
-    public Sting(String nombre, int danio, int stamina) {
+    public Sting(String nombre, int danio, int stamina, int energiaMagica) {
         super(nombre, danio, stamina);
         this.setEnergiaMagica(20);
     }
@@ -17,6 +17,10 @@ public class Sting extends Espada implements IEsMagico{
     @Override
     public void setEnergiaMagica(int energiaMagica) {
 
+    }
+
+    public Sting(String nombre, int danio, int stamina) {
+        super(nombre, danio, stamina);
     }
 
 }

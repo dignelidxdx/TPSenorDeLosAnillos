@@ -147,6 +147,13 @@ public class Personaje {
 
     }
 
+	public int getEnergiaMagica() {
+		return 0;
+	}
+
+	public void setEnergiaMagica(int i) {
+	}
+
 }
 
 

@@ -1,12 +1,16 @@
 package app;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 import app.armas.Anduril;
+import app.armas.ArcoYFlecha;
 import app.armas.Arma;
+import app.armas.Baculo;
 import app.armas.Espada;
+import app.armas.HachaDoble;
 import app.armas.Sting;
 import app.interfaces.IEsMagico;
 import app.interfaces.IHaceMagia;
@@ -28,7 +32,7 @@ import app.reliquias.reliquias_fisicas.ChalecoDeMithril;
 
 
 public class JuegoLOTR {
-    ArrayList<Arma> armas = listaArmas();
+    ArrayList<Arma> armas = chequearInventario();
     ArrayList<Personaje> personajes = listaPersonajes();
     public static Scanner Teclado = new Scanner(System.in);
     public static final String ANSI_BLACK = "\u001B[30m";
@@ -48,33 +52,36 @@ public class JuegoLOTR {
         return reliquias;
     }
 
-    public static ArrayList<Arma> listaArmas() {
-
-        ArrayList<Arma> armas = new ArrayList<>();
     
-        Arma anduril = new Arma("Espada Anduril Magica", 550, -480);
-        armas.add(anduril);
+    public ArrayList<Arma> inventario = new ArrayList<>();
+    public ArrayList<Arma> chequearInventario() {
 
-        Arma arcoFlecha = new Arma("Arco y flecha", 140, -89);
-        armas.add(arcoFlecha);
+        Anduril anduril = new Anduril("Anduril", 25, 15, 15);
+        inventario.add(anduril);
+        ArcoYFlecha arcoYFlecha = new ArcoYFlecha("Arco y Flecha", 10, 8);
+        inventario.add(arcoYFlecha);
+        Baculo baculo = new Baculo("Baculo", 50, 30, 50);
+        inventario.add(baculo);
+        Espada espada = new Espada("Espada", 35, 20);
+        inventario.add(espada);
+        HachaDoble hachaDoble = new HachaDoble("Hacha Doble", 30, 30);
+        inventario.add(hachaDoble); 
+        Sting sting = new Sting("Sting", 20, 20, 25);
+        inventario.add(sting);
+       return inventario;           
 
-        Arma espada = new Arma("Espada Comun", 200, -180);
-        armas.add(espada);
-
-        Arma baculo = new Arma("Baculo Magico", 680, -500);
-        armas.add(baculo);
-
-        Arma hachaDoble = new Arma("Hacha doble", 220, -190);
-        armas.add(hachaDoble);
-
-        Arma sting = new Arma("Sting Espada Magica", 350, -250);
-        armas.add(sting);
-
-        return armas;
-    
     }
 
-        
+    public Arma buscarInventario(String nombre){
+        for (Arma a: this.inventario) {
+
+            if (a.getInventario().equals(nombre))
+                return a;
+        }
+        return null;
+
+    }
+       
     public static ArrayList<Personaje> listaPersonajes() {
 
         ArrayList<Personaje> personajes = new ArrayList<>();
