@@ -8,4 +8,6 @@ public interface ILlevaReliquia {
 
     public void setReliquia(Reliquia reliquia);
 
+    public void seleccionReliquiaPrincipal();
+
 }

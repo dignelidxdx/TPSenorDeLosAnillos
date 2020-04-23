@@ -34,7 +34,8 @@ import app.reliquias.reliquias_fisicas.ChalecoDeMithril;
 
 public class JuegoLOTR {
     ArrayList<Personaje> personajes = listaPersonajes();
-    ArrayList<Arma> armas = listaArmas();
+    public static ArrayList<Arma> armas = listaArmas();
+    public static ArrayList<Reliquia> reliquias = listaReliquias();
     public static Scanner Teclado = new Scanner(System.in);
     public static Random random = new Random();
     public static final String ANSI_BLACK = "\u001B[30m";
@@ -50,11 +51,17 @@ public class JuegoLOTR {
     public static ArrayList<Reliquia> listaReliquias() {
         ArrayList<Reliquia> reliquias = new ArrayList<>();
 
+        Reliquia soyReliquia1 = new AnilloNarya("soyAnilloNarya", 0.20, 0.30, 1);
+        reliquias.add(soyReliquia1);
+        Reliquia soyReliquia2 = new AnilloUnico("soyAnilloUnico", 0.20, 0.30, 1);
+        reliquias.add(soyReliquia2);
+        Reliquia chaleco = new ChalecoDeMithril("Chaleco Mithril", 0.10, 0.40);
+        reliquias.add(chaleco);
+
         return reliquias;
     }
 
     public static ArrayList<Arma> listaArmas() {
-
         ArrayList<Arma> armas = new ArrayList<>();
 
         Arma anduril = new Anduril("Espada Anduril Magica", 40, 30);
@@ -226,11 +233,8 @@ public class JuegoLOTR {
                 System.out.println("Su personaje fue: " + player1.getNombre());
             }
 
-            System.out.println("Seleccione arma:" + player1.getNombre());
-
             System.out.println("Seleccione personaje player2: ");
             mostrarPersonaje();
-
             int respuesta2 = Teclado.nextInt();
 
             if (respuesta2 == 0) {
@@ -256,15 +260,17 @@ public class JuegoLOTR {
         String color;
         boolean turnoPlayer1 = true;
 
+        player1.seleccionArmaPrincipal();
+
+        player2.seleccionArmaPrincipal();        
+
         if (player1 instanceof ILlevaReliquia) {
 
-            Reliquia soyReliquia2 = new AnilloNarya("soyAnilloNarya", 0.20, 0.30, 1);
-            ((ILlevaReliquia) player1).setReliquia(soyReliquia2);
+            ((ILlevaReliquia) player1).seleccionReliquiaPrincipal();
         }
         if (player2 instanceof ILlevaReliquia) {
 
-            Reliquia soyReliquia2 = new AnilloUnico("soyAnilloUnico", 0.20, 0.30, 1);
-            ((ILlevaReliquia) player1).setReliquia(soyReliquia2);
+            ((ILlevaReliquia) player2).seleccionReliquiaPrincipal();
         }
 
         while (player1.estaVivo() && player2.estaVivo()) {
@@ -276,24 +282,24 @@ public class JuegoLOTR {
             atacante = turnoPlayer1 ? player1 : player2;
             atacado = turnoPlayer1 ? player2 : player1;
 
-            System.out.println();
-            System.out.println("Selecciona una arma " + atacante.getNombre() + " para usar:");
-            System.out.println();
-
-            int respuesta = seleccionarArmas();
-            Arma armaActual = armas.get(respuesta - 1);
-
             System.out.println(color + "Ataca: " + atacante.getNombre() + " y tiene una vida de: " + atacante.getSalud()
                     + " y una stamina de: " + atacante.getStamina() + ANSI_RESET);
 
-            if (armaActual instanceof IEsMagico && atacante instanceof IHaceMagia
-                    && atacante instanceof ILlevaReliquia) {
-                ((IHaceMagia) atacante).ataqueEpico(atacado, armaActual);
-            } else if (atacante.getStamina() > armaActual.getStamina()) {
+            if (atacante instanceof IHaceMagia && atacante instanceof ILlevaReliquia) {
+                // entran los Elfos y Wizard, usan magia
+                eligeAtaqueMagico(atacado, atacante);
+                
 
-                atacante.atacar(atacado, armaActual);
+            } else if (atacante instanceof ILlevaReliquia) {
+                // entran los Humanos y los Hobbit, no usan magia
+                System.out.println("Soy un personaje con reliquia");
+                eligeAtaqueReliquia(atacado, atacante);              
 
-            } else if (atacante.getStamina() < armaActual.getStamina()) {
+            } else if (atacante.getStamina() > atacante.getArma().getStamina()) {
+                // Entran los Orcos, Goblin, Ennano, Troll
+                eligeAtaqueSencillo();
+
+            } else if (atacante.getStamina() < atacante.getArma().getStamina()) {
                 atacante.usarPosionStamina(atacante);
             }
 
@@ -336,13 +342,9 @@ public class JuegoLOTR {
                 System.out.println();
                 System.out.println("Selecciona una arma " + player.getNombre() + " para usar:");
                 System.out.println();
-                for (int i = 0; i < armas.size(); i++) {
-                    System.out.println(
-                            i + 1 + ". " + armas.get(i).getNombre() + " Con danio de: " + armas.get(i).getDanio());
-                }
-                int respuesta = Teclado.nextInt();
-                Arma armaActual;
-                armaActual = armas.get(respuesta - 1);
+
+                int respuesta = seleccionarArmas();
+                Arma armaActual = armas.get(respuesta - 1);
 
                 if (player instanceof IHaceMagia && player instanceof ILlevaReliquia) {
 
@@ -436,10 +438,10 @@ public class JuegoLOTR {
         }
     }
 
-    public int seleccionarArmas() {
+    public static int seleccionarArmas() {
 
         int acumulador = 0;
-        for (Arma a : this.armas) {
+        for (Arma a : armas) {
             acumulador++;
             System.out.println(acumulador + ". " + a.getNombre() + " y tiene un dano de: " + a.getDanio());
         }
@@ -455,21 +457,19 @@ public class JuegoLOTR {
             System.out.println(i+1 + ". " + armas.get(i).getNombre() + 
             " Con danio de: " + armas.get(i).getDanio());
         }
-        int respuesta = Teclado.nextInt();
-        
+        int respuesta = Teclado.nextInt();        
         return respuesta;
     }
 
-    public static void seleccionarReliquia() {
-
-        ArrayList<Reliquia> reliquias = listaReliquias();
-        for (int i = 0; i < reliquias.size(); i++) {
-            System.out.println(i+1 + ". " + reliquias.get(i).getNombre());
+    public static int elegirReliquia() {
+        int acumulador = 0;
+        for (Reliquia r : reliquias) {
+            acumulador++;
+            System.out.println(acumulador + ". " + r.getNombre() + " y tiene un factor dano de: " + r.getFactorDeAtaque());
         }
-    }
+        int respuesta = Teclado.nextInt();
 
-    public void elegirReliquia() {
-
+        return respuesta;
     }
 
     public void usoAtaqueEpico(Personaje atacado, Arma armaActual) {
@@ -482,6 +482,106 @@ public class JuegoLOTR {
             atacanteSupremo.setEnergiaMagica(restaMagia);
         } else System.out.println("Huy, no pudiste ejecutar ataque epico!! Te falta magia");
                 
+    }
+
+    public void eligeAtaqueMagico(Personaje atacado, Personaje atacante) {
+
+        System.out.println("Seleccionar que ataque quiere ejecutar: ");
+        System.out.println();
+        System.out.println("1. Ataque de hielo");
+        System.out.println("2. Ataque bola de fuego");
+        System.out.println("3. Invocar a Ulmo");
+        System.out.println("4. Despiadado");
+
+        int respuesta = Teclado.nextInt();
+
+        switch (respuesta) {
+            case 1:
+                ((IHaceMagia) atacante).ataqueEpicoPoderoso(atacado);   
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                
+                break;
+            case 4:
+                
+                break;
+        
+            default:
+                break;
+        }
+
+
+
+    }
+
+    public void usoHielo(Personaje atacado) {
+        
+
+    }
+
+    public void eligeAtaqueReliquia(Personaje atacado, Personaje atacante) {
+
+        System.out.println("Seleccionar que ataque quiere ejecutar: ");
+        System.out.println();
+        System.out.println("1. Invocacion de Nazgul");
+        System.out.println("2. Ataque Multiples flechas");
+        System.out.println("3. Ataque anillo poderoso");
+        System.out.println("4. Ataque ayuda de Smeagol");
+
+        int respuesta = Teclado.nextInt();
+
+        switch (respuesta) {
+            case 1:                
+                atacante.atacarConOjoSauron(atacado);  
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                
+                break;
+            case 4:
+                
+                break;
+        
+            default:
+                break;
+        }
+
+    }
+
+    public void eligeAtaqueSencillo() {
+
+        System.out.println("Seleccionar que ataque quiere ejecutar: ");
+        System.out.println();
+        System.out.println("1. Ataque tirar Roca");
+        System.out.println("2. Ataque adsorber energia");
+        System.out.println("3. Ataque Bruto");
+        System.out.println("4. Ataque especial");
+
+        int respuesta = Teclado.nextInt();
+
+        switch (respuesta) {
+            case 1:
+                
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                
+                break;
+            case 4:
+                
+                break;
+        
+            default:
+                break;
+        }
+
     }
 
 }

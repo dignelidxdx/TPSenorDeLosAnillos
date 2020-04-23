@@ -2,7 +2,9 @@ package app.armas;
 
 import java.util.Scanner;
 
-public class Arma {
+import app.interfaces.ILlevaArma;
+
+public class Arma implements ILlevaArma {
     public static Scanner Teclado = new Scanner(System.in);
 
     // atributos
@@ -122,6 +124,18 @@ public class Arma {
 
     public int getStamina() { // getter
         return stamina;
+    }
+
+    @Override
+    public Arma getArma() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setArma(Arma arma) {
+        // TODO Auto-generated method stub
+
     }
 
     /*

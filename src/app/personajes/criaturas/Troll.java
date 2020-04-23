@@ -1,5 +1,6 @@
 package app.personajes.criaturas;
 
+import app.armas.Arma;
 
 public class Troll extends Criatura {
 
@@ -12,5 +13,20 @@ public class Troll extends Criatura {
         super(nombre, salud, stamina);
         
     }  
+
+    private Arma arma;
+    @Override
+    public Arma getArma() {
+        // TODO Auto-generated method stub
+        return arma;
+    }
+
+    @Override
+    public void setArma(Arma arma) {
+
+        this.arma = arma;
+
+        // TODO Auto-generated method stub
+    }
 
 }

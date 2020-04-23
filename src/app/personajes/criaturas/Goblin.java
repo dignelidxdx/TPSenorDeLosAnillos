@@ -1,6 +1,8 @@
 package app.personajes.criaturas;
 
-public class Goblin extends Orco { 
+import app.armas.Arma;
+
+public class Goblin extends Orco {
     
     public Goblin() {    }
 
@@ -8,6 +10,21 @@ public class Goblin extends Orco {
     public Goblin(String nombre, int salud, int stamina) {
         super(nombre, salud, stamina);
     
+    }
+
+    private Arma arma;
+    @Override
+    public Arma getArma() {
+        // TODO Auto-generated method stub
+        return arma;
+    }
+
+    @Override
+    public void setArma(Arma arma) {
+
+        this.arma = arma;
+
+        // TODO Auto-generated method stub
     }
 
 

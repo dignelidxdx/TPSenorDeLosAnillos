@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import app.JuegoLOTR;
 import app.armas.Arma;
 import app.interfaces.IEsMagico;
 import app.interfaces.IHaceMagia;
+import app.interfaces.ILlevaArma;
 import app.interfaces.ILlevaReliquia;
 import app.reliquias.Reliquia;
 
 /**
  * Personaje
  */
-public class Personaje {
+public class Personaje implements ILlevaArma{
 
     public static Scanner Teclado = new Scanner(System.in);
 
@@ -22,7 +24,7 @@ public class Personaje {
     private int stamina;
     private int defensa;
     private boolean seleccionado;
-    private Arma llevaArma;
+    private Arma arma;
 
     private List<Arma> armas = new ArrayList<>();
 
@@ -112,6 +114,24 @@ public class Personaje {
 
     }
 
+    public void atacarConOjoSauron(Personaje atacado) {
+       
+        if(this.getStamina() > this.getArma().getStamina()){
+
+            int vidaActual = 0;
+
+            vidaActual = atacado.getSalud() - this.getArma().getDanio(); 
+            atacado.setSalud(vidaActual);
+
+            int staminaAtacante = 0;
+
+            staminaAtacante = this.getStamina() - this.getArma().getStamina();
+            this.setStamina(staminaAtacante);
+
+        } else usarPosion(this);         
+
+    }
+
    
     public void regeneracionVida() {
         int regVida = this.getSalud() + 5; 
@@ -148,6 +168,33 @@ public class Personaje {
         }
 
     }
+
+    @Override
+    public Arma getArma() {
+        // TODO Auto-generated method stub
+        return arma;
+    }
+
+    @Override
+    public void setArma(Arma arma) {
+
+        this.arma = arma;
+
+        // TODO Auto-generated method stub
+
+    }
+
+
+	public void seleccionArmaPrincipal() {
+
+        System.out.println("Selecciona tu arma " + this.getNombre());
+        int respuesta = JuegoLOTR.seleccionarArmas();
+        Arma armaActual = JuegoLOTR.armas.get(respuesta - 1);
+        this.setArma(armaActual);  
+        
+        System.out.println(" Tu arma es: " + this.getArma().getNombre());
+	}
+
 
 }
 
