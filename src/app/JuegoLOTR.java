@@ -33,8 +33,8 @@ import app.reliquias.reliquias_fisicas.ChalecoDeMithril;
 
 
 public class JuegoLOTR {
+    ArrayList<Arma> armas = chequearInventario();
     ArrayList<Personaje> personajes = listaPersonajes();
-    public static ArrayList<Arma> armas = listaArmas();
     public static ArrayList<Reliquia> reliquias = listaReliquias();
     public static Scanner Teclado = new Scanner(System.in);
     public static Random random = new Random();
@@ -61,31 +61,36 @@ public class JuegoLOTR {
         return reliquias;
     }
 
-    public static ArrayList<Arma> listaArmas() {
-        ArrayList<Arma> armas = new ArrayList<>();
+    
+    public static ArrayList<Arma> inventario = new ArrayList<>();
+    public ArrayList<Arma> chequearInventario() {
 
-        Arma anduril = new Anduril("Espada Anduril Magica", 40, 30);
-        armas.add(anduril);
-
-        Arma arcoFlecha = new ArcoYFlecha("Arco y Flecha", 35, 20);
-        armas.add(arcoFlecha);
-
-        Arma espada = new Espada("Espada Comun", 33, 25);
-        armas.add(espada);
-
-        Arma baculo = new Baculo("Baculo Magico", 34, 22);
-        armas.add(baculo);
-
-        Arma hachaDoble = new HachaDoble("Hacha doble", 33, 24);
-        armas.add(hachaDoble);
-
-        Arma sting = new Sting("Sting Espada Magica", 34, 25);
-        armas.add(sting);
-
-        return armas;
+        Anduril anduril = new Anduril("Anduril", 25, 15, 15);
+        inventario.add(anduril);
+        ArcoYFlecha arcoYFlecha = new ArcoYFlecha("Arco y Flecha", 10, 8);
+        inventario.add(arcoYFlecha);
+        Baculo baculo = new Baculo("Baculo", 50, 30, 50);
+        inventario.add(baculo);
+        Espada espada = new Espada("Espada", 35, 20);
+        inventario.add(espada);
+        HachaDoble hachaDoble = new HachaDoble("Hacha Doble", 30, 30);
+        inventario.add(hachaDoble); 
+        Sting sting = new Sting("Sting", 20, 20, 25);
+        inventario.add(sting);
+       return inventario;           
 
     }
 
+    public Arma buscarInventario(String nombre){
+        for (Arma a: JuegoLOTR.inventario) {
+
+            if (a.getInventario().equals(nombre))
+                return a;
+        }
+        return null;
+
+    }
+       
     public static ArrayList<Personaje> listaPersonajes() {
 
         ArrayList<Personaje> personajes = new ArrayList<>();
@@ -441,7 +446,7 @@ public class JuegoLOTR {
     public static int seleccionarArmas() {
 
         int acumulador = 0;
-        for (Arma a : armas) {
+        for (Arma a : inventario) {
             acumulador++;
             System.out.println(acumulador + ". " + a.getNombre() + " y tiene un dano de: " + a.getDanio());
         }

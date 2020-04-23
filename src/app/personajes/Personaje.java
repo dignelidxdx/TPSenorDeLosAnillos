@@ -169,19 +169,13 @@ public class Personaje implements ILlevaArma{
 
     }
 
-    @Override
     public Arma getArma() {
-        // TODO Auto-generated method stub
         return arma;
     }
 
     @Override
     public void setArma(Arma arma) {
-
         this.arma = arma;
-
-        // TODO Auto-generated method stub
-
     }
 
 
@@ -189,7 +183,7 @@ public class Personaje implements ILlevaArma{
 
         System.out.println("Selecciona tu arma " + this.getNombre());
         int respuesta = JuegoLOTR.seleccionarArmas();
-        Arma armaActual = JuegoLOTR.armas.get(respuesta - 1);
+        Arma armaActual = JuegoLOTR.inventario.get(respuesta - 1);
         this.setArma(armaActual);  
         
         System.out.println(" Tu arma es: " + this.getArma().getNombre());

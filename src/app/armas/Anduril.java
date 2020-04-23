@@ -4,13 +4,19 @@ import app.interfaces.IEsMagico;
 
 public class Anduril extends Espada implements IEsMagico {
 
-    public Anduril(String nombre, int danio, int stamina) {
+    public Anduril(String nombre, int danio, int stamina, int energiaMagica) {
         super(nombre, danio, stamina);
+        this.setNombre("Anduril Espada Magica");
+        this.setDanio(25);
+        this.setStamina(15);
+        this.setEnergiaMagica(25);
+
     }
 
     @Override
     public int getEnergiaMagica() {
-        return 0;
+        System.out.println("Esta arma contiene una energía mágica de 25");
+        return 25;
     }
 
     @Override
@@ -18,7 +24,9 @@ public class Anduril extends Espada implements IEsMagico {
 
     }
 
-    
-    
+    public Anduril(String nombre, int danio, int stamina) {
+        super(nombre, danio, stamina);
+    }
 
+    
 }

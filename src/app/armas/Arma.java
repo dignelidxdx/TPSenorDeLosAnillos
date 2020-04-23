@@ -1,10 +1,12 @@
 package app.armas;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import app.interfaces.ILlevaArma;
+import app.interfaces.IEsMagico;
+import app.personajes.Personaje;
 
-public class Arma implements ILlevaArma {
+public class Arma {
     public static Scanner Teclado = new Scanner(System.in);
 
     // atributos
@@ -27,142 +29,121 @@ public class Arma implements ILlevaArma {
 
     }
 
-    /*
-     * 
-     * //no estoy segura de si esto deberia ir acá o llamando al constructor Arma en
-     * las diferentes clases
-     * 
-     * Arma anduril = new Arma(); anduril.setNombre("Espada Anduril Magica");
-     * anduril.setDanio(550); anduril.setStamina(-480);
-     * 
-     * Arma arcoFlecha = new Arma(); arcoFlecha.setNombre("Arco y flecha");
-     * arcoFlecha.setDanio(140); arcoFlecha.setStamina(-89);
-     * 
-     * Arma espada = new Arma(); espada.setNombre("Espada Comun");
-     * espada.setDanio(200); espada.setStamina(-180);
-     * 
-     * Arma baculo = new Arma(); baculo.setNombre("Baculo Magico");
-     * baculo.setDanio(680); baculo.setStamina(-500);
-     * 
-     * Arma hachaDoble = new Arma(); hachaDoble.setNombre("Hacha doble");
-     * hachaDoble.setDanio(220); hachaDoble.setStamina(-190);
-     * 
-     */
+    public ArrayList<Arma> inventario = new ArrayList<>();
 
-    public void clavarEspada() { // 1. metodos que sugerí, a debate si los dejamos o borramos :D
-        // agregar lo de la magia/stamina que decrementa
-        for (int i = 0; i > 2; i++) {
-            System.out.println("Presione 1 para atacar con la espada. Presione 2 para salir.");
-            int ataque = Teclado.nextInt();
-            if (ataque == 1) {
-                danio++;
-                System.out.println("¡Te mataré! *Clavando Espada*");
-            } else {
-                System.out.println("Saliendo...");
-            }
+    private int energiaMagica;
+
+    public Arma chequearInventario(Arma chequeoDeInventario) {
+
+        Anduril anduril = new Anduril("Anduril", 25, 15, 15);
+        inventario.add(anduril);
+        ArcoYFlecha arcoYFlecha = new ArcoYFlecha("Arco y Flecha", 10, 8);
+        inventario.add(arcoYFlecha);
+        Baculo baculo = new Baculo("Baculo", 50, 30, 50);
+        inventario.add(baculo);
+        Espada espada = new Espada("Espada", 35, 20);
+        inventario.add(espada);
+        HachaDoble hachaDoble = new HachaDoble("Hacha Doble", 30, 30);
+        inventario.add(hachaDoble);
+        Sting sting = new Sting("Sting", 20, 20, 25);
+        inventario.add(sting);
+        return chequeoDeInventario;
+
+    }
+
+    public void clavarEspada(Personaje personajeAtacado) {
+        System.out.println("¿Qué espada va a usar? 1. Anduril, 2. Sting o 3. Espada común");
+        int choice = Teclado.nextInt();
+        switch (choice) {
+            case 1:
+                personajeAtacado.setSalud(personajeAtacado.getSalud() - this.danio);
+                ((IEsMagico) personajeAtacado)
+                        .setEnergiaMagica(((IEsMagico) personajeAtacado).getEnergiaMagica() - this.energiaMagica);
+            System.out.println("¡Te clavé un Anduril Mágico!");
+                break;
+        
+            case 2:
+            personajeAtacado.setSalud(personajeAtacado.getSalud() - this.danio);
+            ((IEsMagico) personajeAtacado)
+                    .setEnergiaMagica(((IEsMagico) personajeAtacado).getEnergiaMagica() - this.energiaMagica);
+            System.out.println("¡Te clavé un Sting Mágico!");
+            break;
+
+            case 3:
+            personajeAtacado.setSalud(personajeAtacado.getSalud() - this.danio);
+            System.out.println("¡Te clavé una Espada!");
+            break;
+
+            default: 
+            System.out.println("Opción inválida, ingrese 1 2 o 3.");
+                break;
+        }        
+        
+
+    }
+
+    public void dispararFlecha(Personaje personajeAtacado) {
+        for (int flechas = 5; flechas < 1; flechas--) {
+            personajeAtacado.setSalud(personajeAtacado.getSalud()- this.danio);
+            System.out.println("¡Justo en el blanco! Daño: 10, Stamina: 8. Te quedan " + flechas + "flechas por usar.");
 
         }
 
-        System.out.println("Daño total: 200");
-
     }
 
-    public void dispararFlecha() { // 2.
-        System.out.println("¡Justo en el blanco!");
-
-    }
-
-    public void clavarHacha() { // 3.
+    public void clavarHacha(Personaje personajeAtacado) { 
+        personajeAtacado.setSalud(personajeAtacado.getSalud() - this.danio);
         System.out.println("¡Cortado en pedacitos!");
 
     }
 
-    public void usarBaculo() { // 4.
+    public void usarBaculo(Personaje personajeAtacado) { 
+        personajeAtacado.setStamina(personajeAtacado.getStamina() - this.danio);
+        System.out.println("He usado un báculo");
+
 
     }
-
-    /*
-     * 
-     * public boolean aunTieneFlechas() { //5. if (flechas > 0) ; return true;
-     * 
-     * }
-     */
-    // public int chequearInventario(){ //6. la logica de este queda a debate!
-    /*
-     * if(inventario < 0){ System.out.println("Inventario vacío"); else
-     * if(inventario > 0) { return inventario; } }
-     */
-    // }
 
     // atributos con getters and setters
 
-    // primer atributo
-
-    public void setNombre(String nombre) { // setter
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public String getNombre() { // getter
+    public String getNombre() {
         return nombre;
     }
 
-    // segundo atributo
-
-    public void setDanio(int danio) { // setter
+    public void setDanio(int danio) {
         this.danio = danio;
     }
 
-    public int getDanio() { // getter
+    public int getDanio() {
         return danio;
     }
 
-    // tercer atributo
-
-    public void setStamina(int stamina) { // setter
+    public void setStamina(int stamina) {
         this.stamina = stamina;
     }
 
-    public int getStamina() { // getter
+    public int getStamina() {
         return stamina;
     }
 
-    @Override
-    public Arma getArma() {
-        // TODO Auto-generated method stub
-        return null;
+    public static Scanner getTeclado() {
+        return Teclado;
     }
 
-    @Override
-    public void setArma(Arma arma) {
-        // TODO Auto-generated method stub
-
+    public static void setTeclado(Scanner teclado) {
+        Teclado = teclado;
     }
 
-    /*
-     * private int inventario; //cuarto atributo: a debate si lo dejamos int o lo
-     * hacemos una lista :D
-     * 
-     * public void setInventario(int inventario) { //setter this.inventario =
-     * inventario; }
-     * 
-     * public int getInventario() { //getter return inventario; }
-     */
+    public ArrayList<Arma> getInventario() {
+        return inventario;
+    }
 
-    /*
-     * 
-     * private String tipoDeEspada; //quinto atributo, a debate si lo dejamos o lo
-     * borramos
-     * 
-     * public void setTipoDeEspada(String tipoDeEspada) { //setter this.tipoDeEspada
-     * = tipoDeEspada; }
-     * 
-     * public String getTipoDeEspada() { //getter return tipoDeEspada; }
-     * 
-     * private int flechas; //sexto atributo, a debate si lo dejamos o borramos
-     * 
-     * public void setFlechas(int flechas) { //setter this.flechas = flechas; }
-     * 
-     * public int getFlechas() { //getter return flechas; }
-     * 
-     */
+    public void setInventario(ArrayList<Arma> inventario) {
+        this.inventario = inventario;
+    }
+
 }
