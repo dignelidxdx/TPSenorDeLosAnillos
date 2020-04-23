@@ -84,7 +84,7 @@ public class JuegoLOTR {
     public Arma buscarInventario(String nombre){
         for (Arma a: JuegoLOTR.inventario) {
 
-            if (a.getInventario().equals(nombre))
+            if (inventario.equals(nombre))
                 return a;
         }
         return null;

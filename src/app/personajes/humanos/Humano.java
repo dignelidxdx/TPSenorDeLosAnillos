@@ -57,7 +57,7 @@ public class Humano extends Personaje implements ILlevaReliquia {
     @Override
     public Reliquia getReliquia() {
         // TODO Auto-generated method stub
-        return null;
+        return reliquia;
     }
 
     public void seleccionReliquiaPrincipal() {
