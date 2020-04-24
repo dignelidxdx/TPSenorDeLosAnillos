@@ -158,13 +158,13 @@ public class JuegoLOTR {
 
         int salir = 0;
         do {
-            System.out.println("Bienvenido al mejor juego del mundo, LORD OF THE RING");
-            System.out.println("Sientese en la libertad de elegir un personaje:");
+            System.out.println("Bienvenido al mejor juego del mundo, LORD OF THE RINGS!");
+            System.out.println("Para dar comienzo a la batalla, elige un personaje:");
             System.out.println("...............................................");
-            System.out.println("Sos unico player o juegan 2?");
+            System.out.println("SELECCIONA LA MODALIDAD DE JUEGO: ");
             System.out.println("1. Para jugar contra BOT");
             System.out.println("2. Para jugar 1vs1");
-            System.out.println("0. Si se arrepintio");
+            System.out.println("0. Si quieres regresar atrás");
 
             int respuesta = Teclado.nextInt();
 
@@ -195,7 +195,7 @@ public class JuegoLOTR {
         int salir = 1;
 
         do {
-            System.out.println("Eligue un personaje:");
+            System.out.println("Selecciona un personaje:");
             mostrarPersonaje();
             int respuesta = Teclado.nextInt();
 
@@ -204,13 +204,13 @@ public class JuegoLOTR {
             } else if (respuesta > 0 || respuesta < personajes.size()) {
 
                 player1 = personajes.get(respuesta - 1);
-                System.out.println("Su personaje fue: " + player1.getNombre());
+                System.out.println("¡Gran elección! Tu personaje es: " + player1.getNombre());
             }
 
             posicionRandom = random.nextInt(personajes.size()) + 1;
             cpuBot = personajes.get(posicionRandom);
 
-            System.out.println("El cpu eligio: " + cpuBot.getNombre());
+            System.out.println("El cpu eligió: " + cpuBot.getNombre());
 
             iniciarCombateContraCPU(player1, cpuBot);
             salir = 0;
@@ -226,7 +226,7 @@ public class JuegoLOTR {
         int salir = 1;
 
         do {
-            System.out.println("Seleccione personaje player1: ");
+            System.out.println("PLAYER 1, selecciona tu personaje!");
             mostrarPersonaje();
             int respuesta = Teclado.nextInt();
 
@@ -235,10 +235,10 @@ public class JuegoLOTR {
             } else if (respuesta > 0 || respuesta < personajes.size()) {
 
                 player1 = personajes.get(respuesta - 1);
-                System.out.println("Su personaje fue: " + player1.getNombre());
+                System.out.println("¡Gran elección, Player 1! Tu personaje es: " + player1.getNombre());
             }
 
-            System.out.println("Seleccione personaje player2: ");
+            System.out.println("PLAYER 2, selecciona tu personaje!");
             mostrarPersonaje();
             int respuesta2 = Teclado.nextInt();
 
@@ -247,7 +247,7 @@ public class JuegoLOTR {
             } else if (respuesta2 > 0 || respuesta2 < personajes.size()) {
 
                 player2 = personajes.get(respuesta2 - 1);
-                System.out.println("Su personaje fue: " + player2.getNombre());
+                System.out.println("¡Gran elección, Player 2! Tu personaje es: " + player2.getNombre());
 
             }
 
@@ -352,7 +352,7 @@ public class JuegoLOTR {
             if (turno == 1) {
 
                 System.out.println();
-                System.out.println("Selecciona una arma " + player.getNombre() + " para usar:");
+                System.out.println("Selecciona un arma " + player.getNombre() + " para usar:");
                 System.out.println();
 
                 int respuesta = seleccionarArmas();
@@ -419,7 +419,7 @@ public class JuegoLOTR {
 
     public static void ganadorDelCombate(Personaje ganadorCombate) {
 
-        System.out.println("Gano Player " + ganadorCombate.getNombre());
+        System.out.println("Y el ganador es... Player " + ganadorCombate.getNombre());
 
     }
 
@@ -457,7 +457,7 @@ public class JuegoLOTR {
         int acumulador = 0;
         for (Arma a : inventario) {
             acumulador++;
-            System.out.println(acumulador + ". " + a.getNombre() + " y tiene un dano de: " + a.getDanio());
+            System.out.println(acumulador + ". " + a.getNombre() + " y tiene un danio de: " + a.getDanio());
         }
         int respuesta = Teclado.nextInt();
 
@@ -489,7 +489,7 @@ public class JuegoLOTR {
         switch (choice) {
             case 1:
                 System.out.println("Seleccionando Espada... loading...");
-                atacante.clavarEspada(atacado);
+                atacante.clavarEspada(atacado, atacante);
                 break;
             case 2:
                 System.out.println("Seleccionando Arco y flecha... loading");
@@ -507,7 +507,7 @@ public class JuegoLOTR {
                 atacante.clavarHacha(atacado);
                 break;
             default:
-                System.out.println("Opción inválida, elija entre 1, 2, 3 o 4");
+                System.out.println("Opción inválida, elija entre 1, 2, 3 o 4!");
                 break;
 
         }
@@ -533,15 +533,15 @@ public class JuegoLOTR {
             atacanteSupremo.ataqueEpico(atacado, armaActual);
             int restaMagia = atacanteSupremo.getEnergiaMagica() - armaPoderosa.getEnergiaMagica();
             atacanteSupremo.setEnergiaMagica(restaMagia);
-        } else System.out.println("Huy, no pudiste ejecutar ataque epico!! Te falta magia");
+        } else System.out.println("Uyyy, no pudiste ejecutar ataque epico!! Te falta magia");
                 
     }
 
     public void eligeAtaqueMagico(Personaje atacado, Personaje atacante) {
 
-        System.out.println("Seleccionar que ataque quiere ejecutar: ");
+        System.out.println("Selecciona que ataque quieres ejecutar: ");
         System.out.println();
-        System.out.println("1. Ataque de hielo");
+        System.out.println("1. Ataque de hielo epico poderoso");
         System.out.println("2. Ataque con Ojo Sauron");
         System.out.println("3. Invocar a Ulmo");
         System.out.println("4. Despiadado");
@@ -553,7 +553,7 @@ public class JuegoLOTR {
                 ((IHaceMagia) atacante).ataqueEpicoPoderoso(atacado);   
                 break;
             case 2:
-                (atacante).atacarConOjoSauron(atacado);;
+                (atacante).atacarConOjoSauron(atacado);; //ataque repetido en el switch de abajo
                 break;
             case 3:
 
@@ -578,7 +578,7 @@ public class JuegoLOTR {
 
     public void eligeAtaqueReliquia(Personaje atacado, Personaje atacante) {
 
-        System.out.println("Seleccionar que ataque quiere ejecutar: ");
+        System.out.println("Selecciona que ataque quieres ejecutar: ");
         System.out.println();
         System.out.println("1. Invocacion de Nazgul");
         System.out.println("2. Ataque Multiples flechas");
@@ -589,7 +589,7 @@ public class JuegoLOTR {
 
         switch (respuesta) {
             case 1:                
-                atacante.atacarConOjoSauron(atacado);  
+                atacante.atacarConOjoSauron(atacado);  //este ataque está repetido en el switch de arriba!!
                 break;
             case 2:
                 
@@ -609,7 +609,7 @@ public class JuegoLOTR {
 
     public void eligeAtaqueSencillo() {
 
-        System.out.println("Seleccionar que ataque quiere ejecutar: ");
+        System.out.println("Selecciona que ataque quieres ejecutar: ");
         System.out.println();
         System.out.println("1. Ataque tirar Roca");
         System.out.println("2. Ataque adsorber energia");
@@ -645,7 +645,7 @@ public class JuegoLOTR {
             atacanteSupremo.ataqueEpico(atacado, armaActual);
             int restaMagia = atacanteSupremo.getEnergiaMagica() - armaPoderosa.getEnergiaMagica();
             atacanteSupremo.setEnergiaMagica(restaMagia);
-        } else System.out.println("Huy, no pudiste ejecutar ataque epico!! Te falta magia");
+        } else System.out.println("Uyyy, no pudiste ejecutar ataque epico!! Te falta magia");
                 
     }
 

@@ -166,25 +166,25 @@ private int danioDeAtaque;
 
     }
 
-    public void clavarEspada(Personaje personajeAtacado, Personaje atacante) {
+    public void clavarEspada(Personaje atacado, Personaje atacante) {
         System.out.println("¿Qué espada va a usar? 1. Anduril, 2. Sting o 3. Espada común");
         int choice = Teclado.nextInt();
         switch (choice) {
             case 1:
             atacante.setArma(JuegoLOTR.inventario.get(0));
-                personajeAtacado.setSalud(personajeAtacado.getSalud() - this.getArma().getDanio());
+                atacado.setSalud(atacado.getSalud() - this.getArma().getDanio());
                 System.out.println("¡Te clavé un Anduril Mágico!");
                 break;
 
             case 2:
             atacante.setArma(JuegoLOTR.inventario.get(6));
-                personajeAtacado.setSalud(personajeAtacado.getSalud() - this.getArma().getDanio());
+                atacado.setSalud(atacado.getSalud() - this.getArma().getDanio());
                 System.out.println("¡Te clavé un Sting Mágico!");
                 break;
 
             case 3:
             atacante.setArma(JuegoLOTR.inventario.get(4));
-                personajeAtacado.setSalud(personajeAtacado.getSalud() - this.getArma().getDanio());
+                atacado.setSalud(atacado.getSalud() - this.getArma().getDanio());
                 System.out.println("¡Te clavé una Espada!");
                 break;
 

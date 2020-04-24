@@ -1,6 +1,5 @@
 package app.armas;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 
