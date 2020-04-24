@@ -44,9 +44,9 @@ public class FrascoGaladriel extends Reliquia implements IEsMagico {
 
             double ataqueEPICO;
 
-            ataqueEPICO = personaje.getDefensa() * (this.getFactorDeDefensa() + 1.52);
+            ataqueEPICO = personaje.getDefensaBase() * (this.getFactorDeDefensa() + 1.52);
 
-            personaje.setDefensa((int) ataqueEPICO);
+            personaje.setDefensaBase((int) ataqueEPICO);
 
             
 

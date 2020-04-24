@@ -7,7 +7,7 @@ public class Baculo extends Arma implements IEsMagico{
     public Baculo(String nombre, int danio, int stamina, int energiaMagica) {
         super(nombre, danio, stamina);
         this.setNombre("Baculo");
-        this.setDanio(50);
+        this.setDanio(38);
         this.setStamina(30);
         this.setEnergiaMagica(50);
     }

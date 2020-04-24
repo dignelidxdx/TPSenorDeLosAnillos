@@ -10,7 +10,7 @@ public class Enano extends Criatura {
 
     public Enano(String nombre, int salud, int stamina) {
         super(nombre, salud, stamina);
-        
+        super.setDefensaBase(8);
     }
 
     private Arma arma;

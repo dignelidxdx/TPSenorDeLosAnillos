@@ -20,10 +20,12 @@ public class Humano extends Personaje implements ILlevaReliquia {
 
     public Humano(String nombre, int salud, int stamina) {
         super(nombre, salud, stamina);
+        super.setDefensaBase(7);
     }
 
     public Humano(String nombre, int stamina) {
         super(nombre, stamina);
+        super.setDefensaBase(7);
     }
 
     private Arma arma;

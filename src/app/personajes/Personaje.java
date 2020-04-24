@@ -2,74 +2,30 @@ package app.personajes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import app.JuegoLOTR;
 import app.armas.Arma;
 import app.interfaces.ILlevaArma;
 
-
 /**
  * Personaje
  */
 public class Personaje implements ILlevaArma {
 
-    public static Scanner Teclado = new Scanner(System.in);
-
+    public static Scanner Teclado = new Scanner(System.in);    
+    public static Random random = new Random();
     private String nombre;
     private int salud;
     private int stamina;
-    private int defensa;
+    private int defensaBase;
     private boolean seleccionado;
-//agrego factorDeVelocidadDeAtaque. Aca seria la base necesaria para que el ataqueEpico de Vilya tenga sentido y, por cierto, funcione jaja.
-
-private double factorDeVelocidadDeAtaque;
-
-    public double getFactorDeVelocidadDeAtaque() {
-        return factorDeVelocidadDeAtaque;
-    }
-
-    public void setFactorDeVelocidadDeAtaque(double factorDeVelocidadDeAtaque) {
-        this.factorDeVelocidadDeAtaque = 0.15;
-
-    }
-    
-//agrego factorRegeneracionSalud.
-
-private double factorRegeneracionSalud;
-    public double getFactorRegeneracionSalud() {
-        return factorRegeneracionSalud;
-    }
-
-    public void setFactorRegeneracionSalud(double factorRegeneracionSalud) {
-        this.factorRegeneracionSalud = factorRegeneracionSalud;
-    }
-
-//agrego factorRegeneracionStamina
-
-private double factorRegeneracionStamina;
-    public double getFactorRegeneracionStamina() {
-        return factorRegeneracionStamina;
-    }
-
-    public void setFactorRegeneracionStamina(double factorRegeneracionStamina) {
-        this.factorRegeneracionStamina = factorRegeneracionStamina;
-    }
-
-//agrego danioDeAtaque
-
-private int danioDeAtaque;
-    public int getDanioDeAtaque() {
-        return danioDeAtaque;
-    }
-
-    public void setDanioDeAtaque(int danioDeAtaque){
-        this.danioDeAtaque = danioDeAtaque;
-    }
-
+    private double factorDeVelocidadDeAtaque;
+    private double factorRegeneracionSalud;
+    private double factorRegeneracionStamina;
+    private int danioDeAtaque;
     private Arma arma;
-    
-
     private List<Arma> armas = new ArrayList<>();
 
     public Personaje() {
@@ -86,6 +42,47 @@ private int danioDeAtaque;
         this.stamina = stamina;
     }
 
+    // agrego factorDeVelocidadDeAtaque. Aca seria la base necesaria para que el
+    // ataqueEpico de Vilya tenga sentido y, por cierto, funcione jaja.
+
+    public double getFactorDeVelocidadDeAtaque() {
+        return factorDeVelocidadDeAtaque;
+    }
+
+    public void setFactorDeVelocidadDeAtaque(double factorDeVelocidadDeAtaque) {
+        this.factorDeVelocidadDeAtaque = 0.15;
+    }
+
+    // agrego factorRegeneracionSalud.
+
+    public double getFactorRegeneracionSalud() {
+        return factorRegeneracionSalud;
+    }
+
+    public void setFactorRegeneracionSalud(double factorRegeneracionSalud) {
+        this.factorRegeneracionSalud = factorRegeneracionSalud;
+    }
+
+    // agrego factorRegeneracionStamina
+
+    public double getFactorRegeneracionStamina() {
+        return factorRegeneracionStamina;
+    }
+
+    public void setFactorRegeneracionStamina(double factorRegeneracionStamina) {
+        this.factorRegeneracionStamina = factorRegeneracionStamina;
+    }
+
+    // agrego danioDeAtaque
+
+    public int getDanioDeAtaque() {
+        return danioDeAtaque;
+    }
+
+    public void setDanioDeAtaque(int danioDeAtaque) {
+        this.danioDeAtaque = danioDeAtaque;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -110,20 +107,20 @@ private int danioDeAtaque;
         this.stamina = stamina;
     }
 
+    public int getDefensaBase() {
+        return defensaBase;
+    }
+
+    public void setDefensaBase(int defensaBase) {
+        this.defensaBase = defensaBase;
+    }
+
     public List<Arma> getArmas() {
         return armas;
     }
 
     public void setArmas(List<Arma> armas) {
         this.armas = armas;
-    }
-
-    public int getDefensa() {
-        return defensa;
-    }
-
-    public void setDefensa(int defensa) {
-        this.defensa = defensa;
     }
 
     public boolean isSeleccionado() {
@@ -158,14 +155,42 @@ private int danioDeAtaque;
     public void atacar(Personaje atacado) {
 
         if (this.getStamina() > this.getArma().getStamina()) {
-            
-            atacado.setSalud(atacado.getSalud() - this.getArma().getDanio());
+
+            atacado.setSalud((atacado.getSalud() + atacado.getDefensaBase()) - this.getArma().getDanio());
 
             this.setStamina(this.getStamina() - this.getArma().getStamina());
 
+            System.out.println("El personaje: " + atacado.getNombre() + " quedo con salud: " + atacado.getSalud());
+
         } else
             usarPosion(this);
+    }
 
+    public void ataqueDeBot(Personaje atacado) {
+
+
+            atacado.setSalud((atacado.getSalud() - this.getArma().getDanio()));
+
+            System.out.println("El personaje: " + atacado.getNombre() + " quedo con salud: " + atacado.getSalud());
+
+    }
+
+    public void atacarInnovandoNazgul(Personaje atacado) {
+
+            int posicionRandom = random.nextInt(10) + 1;
+            System.out.println("Numero random: " + posicionRandom);
+
+        if (this.getStamina() > this.getArma().getStamina() && posicionRandom > 2) {
+
+            atacado.setSalud((atacado.getSalud() + atacado.getDefensaBase()) - (this.getArma().getDanio() + 5));
+
+            this.setStamina(this.getStamina() - this.getArma().getStamina());
+
+            System.out.println("El personaje: " + atacado.getNombre() + " quedo con salud: " + atacado.getSalud());
+
+        } else if(this.getStamina() < this.getArma().getStamina()) {
+            usarPosion(this);
+        } else System.out.println("Uhh! Fallaste!!");
     }
 
     public void clavarEspada(Personaje atacado, Personaje atacante) {
@@ -173,19 +198,19 @@ private int danioDeAtaque;
         int choice = Teclado.nextInt();
         switch (choice) {
             case 1:
-            atacante.setArma(JuegoLOTR.inventario.get(0));
+                atacante.setArma(JuegoLOTR.inventario.get(0));
                 atacado.setSalud(atacado.getSalud() - this.getArma().getDanio());
                 System.out.println("¡Te clavé un Anduril Mágico!");
                 break;
 
             case 2:
-            atacante.setArma(JuegoLOTR.inventario.get(6));
+                atacante.setArma(JuegoLOTR.inventario.get(5));
                 atacado.setSalud(atacado.getSalud() - this.getArma().getDanio());
                 System.out.println("¡Te clavé un Sting Mágico!");
                 break;
 
             case 3:
-            atacante.setArma(JuegoLOTR.inventario.get(4));
+                atacante.setArma(JuegoLOTR.inventario.get(4));
                 atacado.setSalud(atacado.getSalud() - this.getArma().getDanio());
                 System.out.println("¡Te clavé una Espada!");
                 break;
@@ -200,7 +225,8 @@ private int danioDeAtaque;
     public void dispararFlecha(Personaje personajeAtacado) {
         for (int flechas = 5; flechas > 1; flechas--) {
             personajeAtacado.setSalud(personajeAtacado.getSalud() - this.getArma().getDanio());
-            System.out.println("¡Justo en el blanco! Daño: 2, Stamina: 1. Te quedan " + flechas + " " + "flechas por usar." + "Vida del atacado actual: " + personajeAtacado.getSalud());
+            System.out.println("¡Justo en el blanco! Daño: 2, Stamina: 1. Te quedan " + flechas + " "
+                    + "flechas por usar." + "Vida del atacado actual: " + personajeAtacado.getSalud());
 
         }
 
@@ -246,10 +272,16 @@ private int danioDeAtaque;
         int regStamina = this.getStamina() + 5;
         this.setStamina(regStamina);
     }
-
+    int cantidad = 3;
     public void usarRevivir() {
-        int vidaxCurar = (int) (this.getSalud() + 20);
-        this.setSalud(vidaxCurar);
+        
+
+        if(cantidad > 0) {
+            cantidad = cantidad - 1;
+            this.setSalud(this.getSalud() + 20);
+            System.out.println("Usaste revivir, quedaste con una vida de: " + this.getSalud());
+            System.out.println("Cantidad de posion revivir disponible: " + cantidad);
+        } else System.out.println("No tienes posion revivir! ");        
     }
 
     public void usarPosionStamina(Personaje atacante) {
@@ -291,7 +323,5 @@ private int danioDeAtaque;
 
         System.out.println(" Tu arma es: " + this.getArma().getNombre());
     }
-
-	
 
 }

@@ -18,17 +18,20 @@ public class Elfo extends Criatura implements IHaceMagia, ILlevaReliquia {
 
     public Elfo(String nombre, int salud, int stamina) {
         super(nombre, salud, stamina);
+        super.setDefensaBase(6);
         
     }
 
     public Elfo(String nombre, int salud, int stamina, int energiaMagica, Reliquia reliquia) {
         super(nombre, salud, stamina);
+        super.setDefensaBase(6);
         this.energiaMagica = energiaMagica;
         this.reliquia = reliquia;
     }
 
     public Elfo(String nombre, int salud, int stamina, int energiaMagica) {
         super(nombre, salud, stamina);
+        super.setDefensaBase(6);
         this.energiaMagica = energiaMagica;
     }
 
@@ -101,17 +104,20 @@ public class Elfo extends Criatura implements IHaceMagia, ILlevaReliquia {
 
         if(puedoEjecutarAtaqueEpico()) {        
 
-            int vidaActual = (int) (personaje.getSalud()
-                    - (this.getArma().getDanio() * (this.getReliquia().getFactorDeAtaque() + 1)));
+            int vidaActual = (int) ((personaje.getSalud() + (personaje.getDefensaBase() * (((ILlevaReliquia) personaje)
+                    .getReliquia().getFactorDeDefensa()
+                    + 1)))
+            - (this.getArma().getDanio() * (this.getReliquia().getFactorDeAtaque() + 1)));
+
             personaje.setSalud(vidaActual);
 
             this.setStamina(this.getStamina() - 10);
 
             this.setEnergiaMagica(this.getEnergiaMagica() - 20);
-
+            System.out.println();
             System.out.println("Ejecute un ataque epico a: " + personaje.getNombre() + " y quedo con vida: " 
-            + personaje.getSalud() + " Soy un wizard feliz");
-
+            + personaje.getSalud() + " Soy un Elfo Poderoso!");
+            System.out.println();
         } else System.out.println("Uhh no tienes magia o stamina!!");
     }
 

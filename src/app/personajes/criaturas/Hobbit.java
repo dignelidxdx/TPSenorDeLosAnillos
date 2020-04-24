@@ -12,6 +12,7 @@ public class Hobbit extends Criatura implements ILlevaReliquia {
 
     public Hobbit(String nombre, int salud, int stamina) {
         super(nombre, salud, stamina);
+        super.setDefensaBase(6);
 
     }
 

@@ -68,7 +68,7 @@ public class JuegoLOTR {
         inventario.add(anduril);
         ArcoYFlecha arcoYFlecha = new ArcoYFlecha("Arco y Flecha", 2, 1);
         inventario.add(arcoYFlecha);
-        Baculo baculo = new Baculo("Báculo", 50, 30, 50);
+        Baculo baculo = new Baculo("Báculo", 38, 30, 50);
         inventario.add(baculo);
         Espada espada = new Espada("Espada Común", 35, 20);
         inventario.add(espada);
@@ -163,7 +163,7 @@ public class JuegoLOTR {
             System.out.println("SELECCIONA LA MODALIDAD DE JUEGO: ");
             System.out.println("1. Para jugar contra BOT");
             System.out.println("2. Para jugar 1vs1");
-            System.out.println("0. Si quieres regresar atrás");
+            System.out.println("0. Salir");
 
             int respuesta = Teclado.nextInt();
 
@@ -178,8 +178,12 @@ public class JuegoLOTR {
                     combateContraPlayer();
 
                     break;
+                case 0:
+                    System.out.println("Adios! se cierra el juego...");
+                    break;
                 default:
                     System.out.println("Elige una opcion!");
+                    menuInicializacion();
                     break;
             }
 
@@ -206,7 +210,7 @@ public class JuegoLOTR {
                 System.out.println("¡Gran elección! Tu personaje es: " + player1.getNombre());
             }
 
-            posicionRandom = random.nextInt(personajes.size()) + 1;
+            posicionRandom = random.nextInt(personajes.size()) + 0;
             cpuBot = personajes.get(posicionRandom);
 
             System.out.println("El cpu eligió: " + cpuBot.getNombre());
@@ -288,11 +292,17 @@ public class JuegoLOTR {
             atacado = turnoPlayer1 ? player2 : player1;
 
             System.out.println(color + "Ataca: " + atacante.getNombre() + " y tiene una vida de: " + atacante.getSalud()
-                    + " y una stamina de: " + atacante.getStamina() + ANSI_RESET);                 
+                    + " y una stamina de: " + atacante.getStamina() + ANSI_RESET);
+                                     
 
-            if (atacante instanceof IHaceMagia && atacante instanceof ILlevaReliquia) {
+            if (atacante instanceof IHaceMagia && atacante instanceof ILlevaReliquia && ((ILlevaReliquia) atacante)
+                    .getReliquia() instanceof AnilloElfico) {
                 // entran los Elfos y Wizard, usan magia
-                eligeAtaqueMagico(atacado, atacante);               
+                eligeAtaqueConAnillo(atacado, atacante, color);               
+
+            } else if (atacante instanceof IHaceMagia && atacante instanceof ILlevaReliquia) {
+                // entran los Elfos y Wizard, usan magia
+                eligeAtaqueMagico(atacado, atacante, color);               
 
             } else if (atacante instanceof ILlevaReliquia) {
                 // entran los Humanos y los Hobbit, no usan magia
@@ -308,21 +318,55 @@ public class JuegoLOTR {
             }
 
             if (atacado.getSalud() < 1) {
-                atacado.usarRevivir();
-            }
+                System.out.println("Huy! Te dejaron sin vida, quieres usar revivir?");
+                System.out.println("Elige 1. para usar revivir!");
+                System.out.println("Elige 0. para seguir y dar fin a la batalla!");
+                int respuesta = Teclado.nextInt();
 
+                switch (respuesta) {
+                    case 1:
+                        atacado.usarRevivir();
+                        System.out.println();
+                        break;
+                
+                    default:
+                        break;
+                }         
+                      
+            }
+            if (atacado.getSalud() < 1) {
+                System.out.println();
+                System.out.println("Huy! Parece que el revivir no le fue suficiente: Regenera 5 de vida!");
+            }   
+            
             atacado.regeneracionVida();
             atacado.regeneracionStamina();
+
+            if (atacado.getSalud() < 1) {
+                System.out.println("Lo siento :( Perdiste!");
+            } 
 
             turnoPlayer1 = !turnoPlayer1;
         }
 
         if (player1.getSalud() > 0) {
+            
             ganadorCombate = player1;
         } else {
             ganadorCombate = player2;
         }
         ganadorDelCombate(ganadorCombate);
+        System.out.println();
+        System.out.println("Desea iniciar otra batalla?");
+        System.out.println("1. Seleccionar modalidad");
+        System.out.println("2. Seleccionar personaje");
+        System.out.println("0. Salir");
+        int respuesta = Teclado.nextInt();
+        if(respuesta == 1){
+            menuInicializacion();
+        } else if (respuesta == 2) {
+            combateContraPlayer();
+        } 
         return null;
     }
 
@@ -344,54 +388,40 @@ public class JuegoLOTR {
             if (turno == 1) {
 
                 System.out.println();
-                System.out.println("Selecciona un arma " + player.getNombre() + " para usar:");
+                System.out.println("Selecciona un arma " + player.getNombre() + " para atacar:");
                 System.out.println();
 
-                int respuesta = seleccionarArmas();
-                Arma armaActual = armas.get(respuesta - 1);
-
+                Arma armaActual = inventario.get(0);
+                player.setArma(armaActual);
                 if (player instanceof IHaceMagia && player instanceof ILlevaReliquia) {
-
-                    System.out.println("Hola soy Elfo o Wizard");
-                    // entran los Elfos y Wizard nada mas
-                    if ((((ILlevaReliquia) player).getReliquia() instanceof AnilloElfico
-                            && armaActual instanceof IEsMagico)) {
-                        System.out.println("Soy un elfo con anillo elfico");
-
-                        ((IHaceMagia) player).ataqueEpico(cpuBot, armaActual);
-
-                    } else
-                        player.atacar(cpuBot, armaActual);
-
+                    // entran los Elfos y los Wizard
+                    elegirArma(player, cpuBot);
                 } else if (player instanceof ILlevaReliquia) {
-                    System.out.println("Soy un personaje con reliquia");
-                    player.atacar(cpuBot, armaActual);
                     // entran los Humanos y los Hobbit
-
+                    elegirArma(player, cpuBot);
                 } else if (player.getStamina() > armaActual.getStamina()) {
                     // entran los demas personajes Enano, Troll, Orco, Goblin que tengan stamina.
-
-                    player.atacar(cpuBot, armaActual);
+                    elegirArma(player, cpuBot);
                     System.out.println(ANSI_PURPLE + "Soy: " + player.getNombre() + "Ataque a: " + cpuBot.getNombre()
                             + ANSI_RESET);
                     System.out.println("Quedo con vida: " + cpuBot.getSalud());
                 } else if (player.getStamina() < armaActual.getStamina()) {
                     // entran los demas personajes Enano, Troll, Orco, Goblin para usar posion de
                     // stamina.
-
                     player.usarPosionStamina(player);
                     System.out.println("Me cure estamina" + player.getNombre());
                 }
 
                 turno = 0;
             } else if (turno == 0) {
-                Arma armaActual;
+
                 Random random = new Random();
-                int posicionRandom = random.nextInt(armas.size()) + 1;
-                armaActual = armas.get(posicionRandom);
-
-                cpuBot.atacar(player, armaActual);
-
+                int posicionRandom = random.nextInt(inventario.size()) + 0;                System.out.println("posicon arma: " + posicionRandom);
+                cpuBot.setArma(inventario.get(posicionRandom));
+                
+                cpuBot.ataqueDeBot(player);
+                System.out.println();
+                System.out.println("Ataco el Bot");
                 System.out.println(
                         ANSI_GREEN + "Deje a: " + player.getNombre() + " con vida: " + player.getSalud() + ANSI_RESET);
 
@@ -457,18 +487,6 @@ public class JuegoLOTR {
       
     }
 
-    /*
-
-    public int elegirArma() {
-
-        for (int i = 0; i < armas.size(); i++) {
-            System.out.println(i+1 + ". " + armas.get(i).getNombre() + 
-            " Con danio de: " + armas.get(i).getDanio());
-        }
-        int respuesta = Teclado.nextInt();        
-        return respuesta;
-    }
-*/
     public static void elegirArma(Personaje atacante, Personaje atacado) {
         System.out.println("Elija un arma");
         System.out.println("1. Espada (Anduril, Sting o Espada común)");
@@ -529,14 +547,50 @@ public class JuegoLOTR {
                 
     }
 
-    public void eligeAtaqueMagico(Personaje atacado, Personaje atacante) {
+    public void eligeAtaqueConAnillo(Personaje atacado, Personaje atacante, String color) {
 
+        System.out.println(color);
         System.out.println("Selecciona que ataque quieres ejecutar: ");
         System.out.println();
         System.out.println("1. Deseas cambiar de arma y atacar?");
         System.out.println("2. Ataque Epico");
-        System.out.println("3. Invocar a Ulmo");
+        System.out.println("3. Quemadura (Aumenta el dano si tienes Anillo Narya)");
+        System.out.println("4. invocar a Manwe");
+        System.out.println("5. invocar a Ulmo");
+        System.out.println(ANSI_RESET);
+
+        int respuesta = Teclado.nextInt();
+
+        switch (respuesta) {
+            case 1:
+                elegirArma(atacante, atacado);
+                break;
+            case 2:
+                ((IHaceMagia) atacante).ataqueEpicoPoderoso(atacado);                 
+                break;
+            case 3:
+                // ((AnilloNarya) ((ILlevaReliquia) atacante).getReliquia()).quemadura(atacado, atacante);
+                break;
+            case 4:
+                atacante.atacar(atacado);
+                break;
+            default:
+                System.out.println("Elige la opcion correcta!!");
+                eligeAtaqueConAnillo(atacado, atacante, color);
+                break;
+        }
+    }
+
+    public void eligeAtaqueMagico(Personaje atacado, Personaje atacante, String color) {
+
+        System.out.println(color);
+        System.out.println("Selecciona que ataque quieres ejecutar: ");
+        System.out.println();
+        System.out.println("1. Deseas cambiar de arma y atacar?");
+        System.out.println("2. Ataque Epico");
+        System.out.println("3. Ataque Bola Magica");
         System.out.println("4. Despiadado");
+        System.out.println(ANSI_RESET);
 
         int respuesta = Teclado.nextInt();
 
@@ -555,12 +609,9 @@ public class JuegoLOTR {
                 break;
             default:
                 System.out.println("Elige la opcion correcta!!");
-                eligeAtaqueMagico(atacado, atacante);
+                eligeAtaqueMagico(atacado, atacante, color);
                 break;
         }
-
-
-
     }
 
     public void eligeAtaqueReliquia(Personaje atacado, Personaje atacante) {
@@ -568,9 +619,8 @@ public class JuegoLOTR {
         System.out.println("Selecciona que ataque quieres ejecutar: ");
         System.out.println();
         System.out.println("1. Deseas cambiar de arma y atacar?");
-        System.out.println("2. Ataque anillo poderoso");
-        System.out.println("3. Ataque ayuda de Smeagol");
-        System.out.println("4. Invocacion de Nazgul");
+        System.out.println("2. Ataque Sencillo");
+        System.out.println("3. Invocacion de Nazgul (tiene un 80% chance de ataque y te aumenta 5 puntos de danio!)");
 
         int respuesta = Teclado.nextInt();
 
@@ -582,10 +632,7 @@ public class JuegoLOTR {
                 atacante.atacar(atacado);
                 break;
             case 3:
-                atacante.atacar(atacado);    
-                break;
-            case 4:
-                atacante.atacar(atacado);    
+                atacante.atacarInnovandoNazgul(atacado);   
                 break;       
             default:
                 System.out.println("Elige la opcion correcta!!");

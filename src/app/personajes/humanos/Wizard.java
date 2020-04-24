@@ -12,18 +12,23 @@ public class Wizard extends Humano implements IHaceMagia {
     private Reliquia reliquia;
     
     public Wizard() {
+        super.setDefensaBase(4);
         this.setSalud(70);
         this.setEnergiaMagica(25);
     }
 
     public Wizard(String nombre, int salud, int stamina, Reliquia reliquia, int energiaMagica) {
         super(nombre, salud, stamina, reliquia);
+        super.setDefensaBase(4);
         this.setEnergiaMagica(90);
+        
     }
     public Wizard(String nombre, int stamina) {
         super(nombre, stamina);
+        super.setDefensaBase(4);
         super.setSalud(70);
         this.setEnergiaMagica(25);
+
     }
     
     public int getEnergiaMagica() {
@@ -68,8 +73,9 @@ public class Wizard extends Humano implements IHaceMagia {
         if(puedoEjecutarAtaqueEpico()) {        
          
             int vidaActual = 0;
-            vidaActual = (int) (personaje.getSalud()
+            vidaActual = (int) (personaje.getSalud() 
                     - (arma.getDanio() * (this.getReliquia().getFactorDeAtaque() + 1)));
+
             personaje.setSalud(vidaActual);
 
             int staminaRestante = this.getStamina() - 10;
@@ -90,7 +96,9 @@ public class Wizard extends Humano implements IHaceMagia {
         if(puedoEjecutarAtaqueEpico()) {        
          
             int vidaActual = 0;
-            vidaActual = (int) (personaje.getSalud() - (this.getArma().getDanio() * (this.getReliquia().getFactorDeAtaque() + 1)));
+            vidaActual = (int) ((personaje.getSalud() + (personaje.getDefensaBase() * (( this.getReliquia().getFactorDeDefensa() + 1))))
+           - (this.getArma().getDanio() * (this.getReliquia().getFactorDeAtaque() + 1)));
+
             personaje.setSalud(vidaActual);
 
             this.setStamina(this.getStamina() - 10);
@@ -98,7 +106,7 @@ public class Wizard extends Humano implements IHaceMagia {
             this.setEnergiaMagica(this.getEnergiaMagica() - 5);
 
             System.out.println("Ejecute un ataque epico a: " + personaje.getNombre() + " y quedo con vida: " 
-            + personaje.getSalud() + ". Soy un wizard Poderoso!");
+            + personaje.getSalud() + ". Soy un Wizard Poderoso!");
 
         } else System.out.println("Uhh no tienes magia o stamina!!");
     }
