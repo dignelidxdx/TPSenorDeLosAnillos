@@ -1,4 +1,4 @@
-package app.reliquias.reliquias_anillos;
+package app.reliquias.reliquiasanillos;
 
 import app.armas.Arma;
 import app.interfaces.IHaceMagia;
@@ -43,9 +43,8 @@ public class AnilloVilya extends AnilloElfico {
 
     public void invocarManwe(Personaje personaje, Personaje otroPersonaje, Reliquia reliquia, Arma arma, Scanner Teclado) {
         
-        int vendaval;
-        int consumo;
-        String tecla = "E";
+        
+
 
         if ((personaje instanceof ILlevaReliquia && personaje instanceof IHaceMagia && personaje instanceof ILlevaArma && otroPersonaje instanceof ILlevaArma)
             && (personaje.estaVivo() && otroPersonaje.estaVivo())
@@ -60,15 +59,7 @@ public class AnilloVilya extends AnilloElfico {
             personaje.setDanioDeAtaque((int) ataqueEPICOVilya);
 
 
-            vendaval = otroPersonaje.getArma().getStamina() + this.getDanioViento();
-
-            otroPersonaje.getArma().setStamina(danioViento);
-
-            consumo = (((IHaceMagia) personaje).getEnergiaMagica() - 70);
-    
-            ((IHaceMagia) personaje).setEnergiaMagica(consumo);
-        
-        } else {}
+            
             
 
     }

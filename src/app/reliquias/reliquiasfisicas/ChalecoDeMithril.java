@@ -1,4 +1,4 @@
-package app.reliquias.reliquias_fisicas;
+package app.reliquias.reliquiasfisicas;
 
 import app.reliquias.Reliquia;
 

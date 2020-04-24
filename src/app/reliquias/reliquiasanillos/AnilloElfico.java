@@ -1,4 +1,4 @@
-package app.reliquias.reliquias_anillos;
+package app.reliquias.reliquiasanillos;
 
 public class AnilloElfico extends AnilloDePoder {
 
