@@ -65,17 +65,17 @@ public class JuegoLOTR {
     public static ArrayList<Arma> inventario = new ArrayList<>();
     public ArrayList<Arma> chequearInventario() {
 
-        Anduril anduril = new Anduril("Anduril", 25, 15, 15);
+        Anduril anduril = new Anduril("Anduril Espada Mágica", 25, 15, 25);
         inventario.add(anduril);
         ArcoYFlecha arcoYFlecha = new ArcoYFlecha("Arco y Flecha", 2, 1);
         inventario.add(arcoYFlecha);
-        Baculo baculo = new Baculo("Baculo", 50, 30, 50);
+        Baculo baculo = new Baculo("Báculo", 50, 30, 50);
         inventario.add(baculo);
-        Espada espada = new Espada("Espada", 35, 20);
+        Espada espada = new Espada("Espada Común", 35, 20);
         inventario.add(espada);
         HachaDoble hachaDoble = new HachaDoble("Hacha Doble", 30, 30);
         inventario.add(hachaDoble); 
-        Sting sting = new Sting("Sting", 20, 20, 25);
+        Sting sting = new Sting("Sting Espada Mágica", 20, 20, 20);
         inventario.add(sting);
        return inventario;           
 
