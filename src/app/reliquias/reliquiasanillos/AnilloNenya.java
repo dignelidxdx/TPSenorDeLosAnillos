@@ -1,4 +1,4 @@
-package app.reliquias.reliquias_anillos;
+package app.reliquias.reliquiasanillos;
 
 import java.util.Scanner;
 

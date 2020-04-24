@@ -1,4 +1,4 @@
-package app.reliquias.reliquias_joyas;
+package app.reliquias.reliquiasjoyas;
 
 import app.interfaces.IEsMagico;
 import app.interfaces.IHaceMagia;
@@ -35,8 +35,7 @@ public class FrascoGaladriel extends Reliquia implements IEsMagico {
     public void ataqueEpico(Personaje personaje, Personaje otroPersonaje, Reliquia reliquia,
             FrascoGaladriel frascoGaladriel, Scanner Teclado) {
 
-        String tecla = "E";
-        int consumo;
+        
 
         if ((personaje instanceof ILlevaReliquia && personaje instanceof IHaceMagia)
                 && (personaje.estaVivo() && otroPersonaje.estaVivo())
@@ -50,12 +49,7 @@ public class FrascoGaladriel extends Reliquia implements IEsMagico {
 
             
 
-            consumo = (int) (((IHaceMagia) personaje).getEnergiaMagica() - (this.getEnergiaMagica() * 0.25));
-
-            ((IHaceMagia) personaje).setEnergiaMagica(consumo);
-
-        } else {
-        }
+       
 
     }
 

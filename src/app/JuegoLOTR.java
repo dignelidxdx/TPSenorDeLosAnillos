@@ -23,10 +23,10 @@ import app.personajes.criaturas.Orco;
 import app.personajes.humanos.Humano;
 import app.personajes.humanos.Wizard;
 import app.reliquias.Reliquia;
-import app.reliquias.reliquias_anillos.AnilloElfico;
-import app.reliquias.reliquias_anillos.AnilloNarya;
-import app.reliquias.reliquias_anillos.AnilloUnico;
-import app.reliquias.reliquias_fisicas.ChalecoDeMithril;
+import app.reliquias.reliquiasanillos.AnilloElfico;
+import app.reliquias.reliquiasanillos.AnilloNarya;
+import app.reliquias.reliquiasanillos.AnilloUnico;
+import app.reliquias.reliquiasfisicas.ChalecoDeMithril;
 
 
 
@@ -50,13 +50,12 @@ public class JuegoLOTR {
     public static ArrayList<Reliquia> listaReliquias() {
         ArrayList<Reliquia> reliquias = new ArrayList<>();
 
-        Reliquia soyReliquia1 = new AnilloNarya("Anillo Narya", 0.3, 0.2, 10, 0.3, 10);
-        reliquias.add(soyReliquia1);
-        Reliquia soyReliquia2 = new AnilloUnico("Anillo Unico", 0.3, 0.2, 10, 0.3);
-        reliquias.add(soyReliquia2);
-        Reliquia chaleco = new ChalecoDeMithril("Chaleco Mithril", 0.10, 0.40);
-        reliquias.add(chaleco);
+       
 
+
+
+
+        
         return reliquias;
     }
 
@@ -296,7 +295,7 @@ public class JuegoLOTR {
                                      
 
             if (atacante instanceof IHaceMagia && atacante instanceof ILlevaReliquia && ((ILlevaReliquia) atacante)
-                    .getReliquia() instanceof AnilloElfico) {
+                    .getReliquia() instanceof app.reliquias.reliquiasanillos.AnilloElfico) {
                 // entran los Elfos y Wizard, usan magia
                 eligeAtaqueConAnillo(atacado, atacante, color);               
 
