@@ -1,8 +1,4 @@
 package app.personajes.criaturas;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import app.personajes.Personaje;
 
 public class Criatura extends Personaje {

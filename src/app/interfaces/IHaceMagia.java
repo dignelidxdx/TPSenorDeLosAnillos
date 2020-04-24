@@ -12,5 +12,7 @@ public interface IHaceMagia {
     public boolean puedoEjecutarAtaqueEpico();
 
     public void ataqueEpico(Personaje personaje, Arma arma);
+
+    public void ataqueEpicoPoderoso(Personaje personaje);
     
 } 
