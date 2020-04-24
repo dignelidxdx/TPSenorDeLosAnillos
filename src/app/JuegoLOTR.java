@@ -67,7 +67,7 @@ public class JuegoLOTR {
 
         Anduril anduril = new Anduril("Anduril", 25, 15, 15);
         inventario.add(anduril);
-        ArcoYFlecha arcoYFlecha = new ArcoYFlecha("Arco y Flecha", 10, 8);
+        ArcoYFlecha arcoYFlecha = new ArcoYFlecha("Arco y Flecha", 2, 1);
         inventario.add(arcoYFlecha);
         Baculo baculo = new Baculo("Baculo", 50, 30, 50);
         inventario.add(baculo);
@@ -304,8 +304,11 @@ public class JuegoLOTR {
                 
                 */
 
+
+
             if (atacante.getStamina() > atacante.getArma().getStamina()) {
                 // Entran los Orcos, Goblin, Ennano, Troll
+                
                 elegirArma(atacante, atacado);
 
             } else if (atacante.getStamina() < atacante.getArma().getStamina()) {
@@ -475,28 +478,32 @@ public class JuegoLOTR {
     }
 */
     public static void elegirArma(Personaje atacante, Personaje atacado) {
-        int choice = Teclado.nextInt();
         System.out.println("Elija un arma");
         System.out.println("1. Espada (Anduril, Sting o Espada común)");
         System.out.println("2. Arco y flecha");
         System.out.println("3. Baculo");
         System.out.println("4. Hacha doble");
+        int choice = Teclado.nextInt();
+
 
         switch (choice) {
             case 1:
-                System.out.println("Seleccionando Anduril... loading...");
+                System.out.println("Seleccionando Espada... loading...");
                 atacante.clavarEspada(atacado);
                 break;
             case 2:
                 System.out.println("Seleccionando Arco y flecha... loading");
+                atacante.setArma(inventario.get(1));
                 atacante.dispararFlecha(atacado);
                 break;
             case 3:
                 System.out.println("Seleccionando Baculo... loading");
+                atacante.setArma(inventario.get(2));
                 atacante.usarBaculo(atacado);
                 break;
             case 4:
                 System.out.println("Seleccionando Hacha doble... loading");
+                atacante.setArma(inventario.get(4));
                 atacante.clavarHacha(atacado);
                 break;
             default:

@@ -119,21 +119,24 @@ public class Personaje implements ILlevaArma {
 
     }
 
-    public void clavarEspada(Personaje personajeAtacado) {
+    public void clavarEspada(Personaje personajeAtacado, Personaje atacante) {
         System.out.println("¿Qué espada va a usar? 1. Anduril, 2. Sting o 3. Espada común");
         int choice = Teclado.nextInt();
         switch (choice) {
             case 1:
+            atacante.setArma(JuegoLOTR.inventario.get(0));
                 personajeAtacado.setSalud(personajeAtacado.getSalud() - this.getArma().getDanio());
                 System.out.println("¡Te clavé un Anduril Mágico!");
                 break;
 
             case 2:
+            atacante.setArma(JuegoLOTR.inventario.get(6));
                 personajeAtacado.setSalud(personajeAtacado.getSalud() - this.getArma().getDanio());
                 System.out.println("¡Te clavé un Sting Mágico!");
                 break;
 
             case 3:
+            atacante.setArma(JuegoLOTR.inventario.get(4));
                 personajeAtacado.setSalud(personajeAtacado.getSalud() - this.getArma().getDanio());
                 System.out.println("¡Te clavé una Espada!");
                 break;
@@ -146,9 +149,9 @@ public class Personaje implements ILlevaArma {
     }
 
     public void dispararFlecha(Personaje personajeAtacado) {
-        for (int flechas = 5; flechas < 1; flechas--) {
+        for (int flechas = 5; flechas > 1; flechas--) {
             personajeAtacado.setSalud(personajeAtacado.getSalud() - this.getArma().getDanio());
-            System.out.println("¡Justo en el blanco! Daño: 10, Stamina: 8. Te quedan " + flechas + "flechas por usar.");
+            System.out.println("¡Justo en el blanco! Daño: 2, Stamina: 1. Te quedan " + flechas + " " + "flechas por usar." + "Vida del atacado actual: " + personajeAtacado.getSalud());
 
         }
 
