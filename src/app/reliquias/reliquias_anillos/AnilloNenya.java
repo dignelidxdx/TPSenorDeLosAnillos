@@ -1,11 +1,27 @@
 package app.reliquias.reliquias_anillos;
 
+import java.util.Scanner;
+
+import app.interfaces.IHaceMagia;
+import app.interfaces.ILlevaReliquia;
+import app.personajes.Personaje;
+import app.personajes.criaturas.Elfo;
+import app.personajes.humanos.Wizard;
+import app.reliquias.Reliquia;
+
 public class AnilloNenya extends AnilloElfico {
 
-    public AnilloNenya(String nombre, double factorDeAtaque, double factorDeDefensa, int energiaMagica) {
-        super(nombre, factorDeAtaque, factorDeDefensa, energiaMagica);
-        this.setDanioHielo(12);
-        // this.invocacionUlmo(ataqueEPICO);
+    public AnilloNenya() {
+
+    }
+
+    public AnilloNenya(String nombre, double factorDeAtaque, double factorDeDefensa, int energiaMagica,
+            double factorDeVelocidadDeAtaque, int danioHielo) {
+        super(nombre, factorDeAtaque, factorDeDefensa, energiaMagica, factorDeVelocidadDeAtaque);
+        this.setDanioHielo(danioHielo);
+        this.setEnergiaMagica(+40);
+        this.setFactorDeDefensa(+0.30);
+
     }
 
     private int danioHielo;
@@ -14,11 +30,12 @@ public class AnilloNenya extends AnilloElfico {
         return danioHielo;
     }
 
-    public void setDanioHielo(int danioHielo){
-        this.danioHielo = danioHielo;
+    public void setDanioHielo(int danioHielo) {
+        this.danioHielo = 50;
     }
 
     private double ataqueEPICO;
+
     public double getAtaqueEPICO() {
         return ataqueEPICO;
     }
@@ -27,36 +44,35 @@ public class AnilloNenya extends AnilloElfico {
         this.ataqueEPICO = ataqueEPICO;
     }
 
-    // public int escarcha(int danioHielo) {
-        
-    //     if (AnilloNenya Nenya == 1) {
-            
-    //         while (boolean estaVivo() == true) {
+    public void invocacionUlmo(Personaje personaje, Personaje otroPersonaje, Reliquia reliquia, Wizard wizard,
+            Elfo elfo, Scanner Teclado) {
 
-    //             for(int contadorTurno = 0; contadorTurno >= 0; contadorTurno++) {
+        int escarcha;
+        int consumo;
+        String tecla = "E";
 
-                //     return Contrincante contrincante getEstamina() = Contrincante contrincante getEstamina() - this.danioHielo;
-                // }
+        if (((personaje instanceof ILlevaReliquia && personaje instanceof IHaceMagia
+                && otroPersonaje instanceof IHaceMagia) && (personaje.estaVivo() && otroPersonaje.estaVivo())
+                && (personaje.getSalud() <= personaje.getSalud() * 0.15))
+                && ((reliquia.getNombre().equals("Anillo Nenya") && (Teclado.nextLine().equals(tecla))))) {
 
-    //         }
+            System.out.println(
+                    "Tus lágrimas de dolor han conmovido al corazón de Ulmo, quien desata su furia contra tu enemigo");
 
-    //     } else {}
+            this.ataqueEPICO = otroPersonaje.getSalud() - (otroPersonaje.getSalud() * 0.70);
 
-    // }
+            otroPersonaje.setSalud((int) ataqueEPICO);
 
-    // public double invocacionUlmo(int ataqueEPICO) {
+            escarcha = ((IHaceMagia) otroPersonaje).getEnergiaMagica() - this.getDanioHielo();
 
-    //     if (AnilloNenya Nenya == 1) {
+            ((IHaceMagia) otroPersonaje).setEnergiaMagica(escarcha);
 
-            // while (estaVivo() == true) {
+            consumo = (((IHaceMagia) personaje).getEnergiaMagica() - 70);
 
-    //             if (getSalud() <= (getSalud() * 0.15) {
+            ((IHaceMagia) personaje).setEnergiaMagica(consumo);
 
-        //             return this.ataqueEPICO = Contrincante contrincante getSalud() - (Contrincante contrincante getSalud() * 0.70);
-        //         }
-        //     }
-        // }
+        } else {
+        }
 
-
-    // }
+    }
 }

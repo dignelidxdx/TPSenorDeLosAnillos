@@ -6,7 +6,6 @@ import app.interfaces.IHaceMagia;
 import app.interfaces.ILlevaReliquia;
 import app.personajes.Personaje;
 import app.reliquias.Reliquia;
-import app.reliquias.reliquias_anillos.AnilloNarya;
 
 public class Elfo extends Criatura implements IHaceMagia, ILlevaReliquia {
 
@@ -63,8 +62,8 @@ public class Elfo extends Criatura implements IHaceMagia, ILlevaReliquia {
     public void ataqueEpico(Personaje personaje, Arma arma) {
         // TODO Auto-generated method stub
 
-        Reliquia reliquia = new AnilloNarya("soy anillo", 0.3, 0.3, 20);
-        this.setReliquia(reliquia);
+        
+        this.setReliquia(JuegoLOTR.reliquias.get(0));
 
         if(this.getStamina() > 10 && this.getEnergiaMagica() > 20) {
          

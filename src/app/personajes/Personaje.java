@@ -5,13 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import app.JuegoLOTR;
-import app.armas.Anduril;
 import app.armas.Arma;
-import app.interfaces.IEsMagico;
-import app.interfaces.IHaceMagia;
 import app.interfaces.ILlevaArma;
-import app.interfaces.ILlevaReliquia;
-import app.reliquias.Reliquia;
+
 
 /**
  * Personaje
@@ -25,6 +21,52 @@ public class Personaje implements ILlevaArma {
     private int stamina;
     private int defensa;
     private boolean seleccionado;
+//agrego factorDeVelocidadDeAtaque. Aca seria la base necesaria para que el ataqueEpico de Vilya tenga sentido y, por cierto, funcione jaja.
+
+private double factorDeVelocidadDeAtaque;
+
+    public double getFactorDeVelocidadDeAtaque() {
+        return factorDeVelocidadDeAtaque;
+    }
+
+    public void setFactorDeVelocidadDeAtaque(double factorDeVelocidadDeAtaque) {
+        this.factorDeVelocidadDeAtaque = 0.15;
+
+    }
+    
+//agrego factorRegeneracionSalud.
+
+private double factorRegeneracionSalud;
+    public double getFactorRegeneracionSalud() {
+        return factorRegeneracionSalud;
+    }
+
+    public void setFactorRegeneracionSalud(double factorRegeneracionSalud) {
+        this.factorRegeneracionSalud = factorRegeneracionSalud;
+    }
+
+//agrego factorRegeneracionStamina
+
+private double factorRegeneracionStamina;
+    public double getFactorRegeneracionStamina() {
+        return factorRegeneracionStamina;
+    }
+
+    public void setFactorRegeneracionStamina(double factorRegeneracionStamina) {
+        this.factorRegeneracionStamina = factorRegeneracionStamina;
+    }
+
+//agrego danioDeAtaque
+
+private int danioDeAtaque;
+    public int getDanioDeAtaque() {
+        return danioDeAtaque;
+    }
+
+    public void setDanioDeAtaque(int danioDeAtaque){
+        this.danioDeAtaque = danioDeAtaque;
+    }
+
     private Arma arma;
     
 
@@ -126,25 +168,25 @@ public class Personaje implements ILlevaArma {
 
     }
 
-    public void clavarEspada(Personaje personajeAtacado) {
+    public void clavarEspada(Personaje atacado, Personaje atacante) {
         System.out.println("¿Qué espada va a usar? 1. Anduril, 2. Sting o 3. Espada común");
         int choice = Teclado.nextInt();
         switch (choice) {
             case 1:
-                this.setArma(JuegoLOTR.inventario.get(0));
-                personajeAtacado.setSalud(personajeAtacado.getSalud() - this.getArma().getDanio());
+            atacante.setArma(JuegoLOTR.inventario.get(0));
+                atacado.setSalud(atacado.getSalud() - this.getArma().getDanio());
                 System.out.println("¡Te clavé un Anduril Mágico!");
                 break;
 
             case 2:
-                this.setArma(JuegoLOTR.inventario.get(5));
-                personajeAtacado.setSalud(personajeAtacado.getSalud() - this.getArma().getDanio());
+            atacante.setArma(JuegoLOTR.inventario.get(6));
+                atacado.setSalud(atacado.getSalud() - this.getArma().getDanio());
                 System.out.println("¡Te clavé un Sting Mágico!");
                 break;
 
             case 3:
-                this.setArma(JuegoLOTR.inventario.get(4));
-                personajeAtacado.setSalud(personajeAtacado.getSalud() - this.getArma().getDanio());
+            atacante.setArma(JuegoLOTR.inventario.get(4));
+                atacado.setSalud(atacado.getSalud() - this.getArma().getDanio());
                 System.out.println("¡Te clavé una Espada!");
                 break;
 

@@ -1,5 +1,6 @@
 package app.reliquias;
 
+
 public class Reliquia {
 
     /** Constructores */
@@ -13,7 +14,11 @@ public class Reliquia {
         this.nombre = nombre;
         this.factorDeAtaque = factorDeAtaque;
         this.factorDeDefensa = factorDeDefensa;
+       
+        
     }
+
+    
 
     //atributos con getters y setters
 
@@ -44,4 +49,7 @@ public class Reliquia {
     public void setFactorDeDefensa(double factorDeDefensa) {
         this.factorDeDefensa = factorDeDefensa;
     }
+
+    
+
 }
