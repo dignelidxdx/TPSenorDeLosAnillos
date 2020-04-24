@@ -1,7 +1,5 @@
 package app.reliquias;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Reliquia {
 
@@ -16,6 +14,8 @@ public class Reliquia {
         this.nombre = nombre;
         this.factorDeAtaque = factorDeAtaque;
         this.factorDeDefensa = factorDeDefensa;
+       
+        
     }
 
     
@@ -49,4 +49,7 @@ public class Reliquia {
     public void setFactorDeDefensa(double factorDeDefensa) {
         this.factorDeDefensa = factorDeDefensa;
     }
+
+    
+
 }

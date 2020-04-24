@@ -15,6 +15,52 @@ public class Personaje {
     private int stamina;
     private int defensa;
     private boolean seleccionado;
+//agrego factorDeVelocidadDeAtaque. Aca seria la base necesaria para que el ataqueEpico de Vilya tenga sentido y, por cierto, funcione jaja.
+
+private double factorDeVelocidadDeAtaque;
+
+    public double getFactorDeVelocidadDeAtaque() {
+        return factorDeVelocidadDeAtaque;
+    }
+
+    public void setFactorDeVelocidadDeAtaque(double factorDeVelocidadDeAtaque) {
+        this.factorDeVelocidadDeAtaque = 0.15;
+
+    }
+    
+//agrego factorRegeneracionSalud.
+
+private double factorRegeneracionSalud;
+    public double getFactorRegeneracionSalud() {
+        return factorRegeneracionSalud;
+    }
+
+    public void setFactorRegeneracionSalud(double factorRegeneracionSalud) {
+        this.factorRegeneracionSalud = factorRegeneracionSalud;
+    }
+
+//agrego factorRegeneracionStamina
+
+private double factorRegeneracionStamina;
+    public double getFactorRegeneracionStamina() {
+        return factorRegeneracionStamina;
+    }
+
+    public void setFactorRegeneracionStamina(double factorRegeneracionStamina) {
+        this.factorRegeneracionStamina = factorRegeneracionStamina;
+    }
+
+//agrego danioDeAtaque
+
+private int danioDeAtaque;
+    public int getDanioDeAtaque() {
+        return danioDeAtaque;
+    }
+
+    public void setDanioDeAtaque(int danioDeAtaque){
+        this.danioDeAtaque = danioDeAtaque;
+    }
+
 
     private List<Arma> armas = new ArrayList<>();
 

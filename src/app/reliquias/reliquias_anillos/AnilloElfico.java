@@ -6,9 +6,9 @@ public class AnilloElfico extends AnilloDePoder {
        
     }
     
-    public AnilloElfico(String nombre, double factorDeAtaque, double factorDeDefensa, int energiaMagica) {
+    public AnilloElfico(String nombre, double factorDeAtaque, double factorDeDefensa, int energiaMagica, double factorDeVelocidadDeAtaque) {
 
-        super(nombre, factorDeAtaque, factorDeDefensa, energiaMagica);
+        super(nombre, factorDeAtaque, factorDeDefensa, energiaMagica, factorDeVelocidadDeAtaque);
         
     }
 
