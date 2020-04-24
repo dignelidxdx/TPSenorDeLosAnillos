@@ -306,12 +306,11 @@ public class JuegoLOTR {
 
             } else if (atacante instanceof ILlevaReliquia) {
                 // entran los Humanos y los Hobbit, no usan magia
-                System.out.println("Soy un personaje con reliquia");
-                eligeAtaqueReliquia(atacado, atacante);      
+                eligeAtaqueReliquia(atacado, atacante, color);      
                 
             } else if (atacante.getStamina() > atacante.getArma().getStamina()) {
                 // Entran los Orcos, Goblin, Ennano, Troll                
-                eligeAtaqueSencillo(atacante, atacado);
+                eligeAtaqueSencillo(atacante, atacado, color);
 
             } else if (atacante.getStamina() < atacante.getArma().getStamina()) {
                 atacante.usarPosionStamina(atacante);
@@ -421,10 +420,10 @@ public class JuegoLOTR {
                 
                 cpuBot.ataqueDeBot(player);
                 System.out.println();
-                System.out.println("Ataco el Bot");
+                System.out.println(ANSI_GREEN + "Ataco el Bot:" + ANSI_RESET);
                 System.out.println(
                         ANSI_GREEN + "Deje a: " + player.getNombre() + " con vida: " + player.getSalud() + ANSI_RESET);
-
+                System.out.println();
                 turno = 1;
             }
 
@@ -588,7 +587,7 @@ public class JuegoLOTR {
         System.out.println();
         System.out.println("1. Deseas cambiar de arma y atacar?");
         System.out.println("2. Ataque Epico");
-        System.out.println("3. Ataque Bola Magica");
+        System.out.println("3. Ataque Bola Magica (tiene un 70% chance de ataque y te aumenta 5 puntos de danio del arma!)");
         System.out.println("4. Despiadado");
         System.out.println(ANSI_RESET);
 
@@ -602,7 +601,7 @@ public class JuegoLOTR {
                 ((IHaceMagia) atacante).ataqueEpicoPoderoso(atacado);                 
                 break;
             case 3:
-                atacante.atacar(atacado);                
+                atacante.atacarBolaMagica(atacado);                
                 break;
             case 4:
                 atacante.atacar(atacado);
@@ -614,14 +613,15 @@ public class JuegoLOTR {
         }
     }
 
-    public void eligeAtaqueReliquia(Personaje atacado, Personaje atacante) {
+    public void eligeAtaqueReliquia(Personaje atacado, Personaje atacante, String color) {
 
+        System.out.println(color);
         System.out.println("Selecciona que ataque quieres ejecutar: ");
         System.out.println();
         System.out.println("1. Deseas cambiar de arma y atacar?");
         System.out.println("2. Ataque Sencillo");
         System.out.println("3. Invocacion de Nazgul (tiene un 80% chance de ataque y te aumenta 5 puntos de danio!)");
-
+        System.out.println(ANSI_RESET);
         int respuesta = Teclado.nextInt();
 
         switch (respuesta) {
@@ -636,21 +636,21 @@ public class JuegoLOTR {
                 break;       
             default:
                 System.out.println("Elige la opcion correcta!!");
-                eligeAtaqueReliquia(atacado, atacante);
+                eligeAtaqueReliquia(atacado, atacante, color);
                 break;
         }
 
     }
 
-    public void eligeAtaqueSencillo(Personaje atacado, Personaje atacante) {
-
+    public void eligeAtaqueSencillo(Personaje atacado, Personaje atacante, String color) {
+        System.out.println(color);
         System.out.println("Selecciona que ataque quieres ejecutar: ");
         System.out.println();
         System.out.println("1. Deseas cambiar de arma y atacar?");
         System.out.println("2. Ataque adsorber energia");
         System.out.println("3. Ataque Bruto");
         System.out.println("4. Ataque especial");
-
+        System.out.println(ANSI_RESET);
         int respuesta = Teclado.nextInt();
 
         switch (respuesta) {
@@ -668,7 +668,7 @@ public class JuegoLOTR {
                 break;
             default:
                 System.out.println("Elige la opcion correcta!!");
-                eligeAtaqueSencillo(atacado, atacante);
+                eligeAtaqueSencillo(atacado, atacante, color);
                 break;
         }
 

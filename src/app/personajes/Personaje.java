@@ -193,6 +193,24 @@ public class Personaje implements ILlevaArma {
         } else System.out.println("Uhh! Fallaste!!");
     }
 
+    public void atacarBolaMagica(Personaje atacado) {
+
+        int posicionRandom = random.nextInt(10) + 1;
+        System.out.println("Numero random: " + posicionRandom);
+
+        if (this.getStamina() > this.getArma().getStamina() && posicionRandom > 3) {
+
+            atacado.setSalud((atacado.getSalud() + atacado.getDefensaBase()) - ((this.getArma().getDanio() + 8) ));
+
+            this.setStamina(this.getStamina() - this.getArma().getStamina());
+
+            System.out.println("El personaje: " + atacado.getNombre() + " quedo con salud: " + atacado.getSalud());
+
+        } else if(this.getStamina() < this.getArma().getStamina()) {
+            usarPosion(this);
+        } else System.out.println("Uhh! Fallaste!!");
+    }
+
     public void clavarEspada(Personaje atacado, Personaje atacante) {
         System.out.println("¿Qué espada va a usar? 1. Anduril, 2. Sting o 3. Espada común");
         int choice = Teclado.nextInt();

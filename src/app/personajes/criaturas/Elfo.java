@@ -121,6 +121,27 @@ public class Elfo extends Criatura implements IHaceMagia, ILlevaReliquia {
         } else System.out.println("Uhh no tienes magia o stamina!!");
     }
 
+    public void atacarBolaMagica(Personaje atacado) {
+
+        int posicionRandom = random.nextInt(10) + 1;
+
+        if (this.getStamina() > this.getArma().getStamina() && posicionRandom > 3) {
+
+            atacado.setSalud((int) ((atacado.getSalud() + atacado.getDefensaBase())
+                    - ((this.getArma().getDanio() + 6) * (this.getReliquia().getFactorDeAtaque() + 1))));
+
+            this.setStamina(this.getStamina() - this.getArma().getStamina());
+            System.out.println();
+            System.out.println(this.getNombre() + " ejecutaste ataque Bola Mágica...");
+            System.out.println();
+            System.out.println("El personaje: " + atacado.getNombre() + " quedo con salud: " + atacado.getSalud());
+            System.out.println();
+        } else if(this.getStamina() < this.getArma().getStamina()) {
+            usarPosion(this);
+        } else System.out.println("Uhh! Fallaste!!");
+
+    }    
+
     public void seleccionReliquiaPrincipal() {
         System.out.println("Selecciona tu reliquia " + this.getNombre());
         int respuesta= JuegoLOTR.elegirReliquia();

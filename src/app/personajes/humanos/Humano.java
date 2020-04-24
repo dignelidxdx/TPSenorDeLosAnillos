@@ -62,6 +62,27 @@ public class Humano extends Personaje implements ILlevaReliquia {
         return reliquia;
     }
 
+    public void atacarInnovandoNazgul(Personaje atacado) {
+
+        int posicionRandom = random.nextInt(10) + 1;
+
+    if (this.getStamina() > this.getArma().getStamina() && posicionRandom > 2) {
+
+        atacado.setSalud((int) ((atacado.getSalud() + (atacado.getDefensaBase() * (((ILlevaReliquia) atacado).getReliquia().getFactorDeDefensa() + 1)))
+                - ((this.getArma().getDanio() + 5) * (this.getReliquia().getFactorDeAtaque() + 1))));
+
+        this.setStamina(this.getStamina() - this.getArma().getStamina());
+        System.out.println();
+        System.out.println("Invocaste a los Nazgul!! El ambiente se puso tenso en el territorio...");
+        System.out.println();
+        System.out.println("Los Humanos aumentan su confianza!!");
+        System.out.println("El personaje: " + atacado.getNombre() + " quedo con salud: " + atacado.getSalud());
+
+    } else if(this.getStamina() < this.getArma().getStamina()) {
+        usarPosion(this);
+    } else System.out.println("Uhh! Fallaste!!");
+}
+
     public void seleccionReliquiaPrincipal() {
         System.out.println("Selecciona tu reliquia " + this.getNombre());
         int respuesta = JuegoLOTR.elegirReliquia();
