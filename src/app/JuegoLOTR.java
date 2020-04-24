@@ -306,7 +306,7 @@ public class JuegoLOTR {
 
             if (atacante.getStamina() > atacante.getArma().getStamina()) {
                 // Entran los Orcos, Goblin, Ennano, Troll
-                elegirArma(atacante, atacado);
+                // elegirArma(atacante, atacado);
 
             } else if (atacante.getStamina() < atacante.getArma().getStamina()) {
                 atacante.usarPosionStamina(atacante);
@@ -330,6 +330,7 @@ public class JuegoLOTR {
         ganadorDelCombate(ganadorCombate);
         return null;
     }
+
 
     public void iniciarCombateContraCPU(Personaje player, Personaje cpuBot) {
 
