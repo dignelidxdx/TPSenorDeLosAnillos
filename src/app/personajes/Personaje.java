@@ -104,15 +104,22 @@ public class Personaje implements ILlevaArma {
 
         if (this.getStamina() > armaAtacante.getStamina()) {
 
-            int vidaActual = 0;
+            atacado.setSalud(atacado.getSalud() - armaAtacante.getDanio());
 
-            vidaActual = atacado.getSalud() - armaAtacante.getDanio();
-            atacado.setSalud(vidaActual);
+            this.setStamina(this.getStamina() - armaAtacante.getStamina());
 
-            int staminaAtacante = 0;
+        } else
+            usarPosion(this);
 
-            staminaAtacante = this.getStamina() - armaAtacante.getStamina();
-            this.setStamina(staminaAtacante);
+    }
+
+    public void atacar(Personaje atacado) {
+
+        if (this.getStamina() > this.getArma().getStamina()) {
+            
+            atacado.setSalud(atacado.getSalud() - this.getArma().getDanio());
+
+            this.setStamina(this.getStamina() - this.getArma().getStamina());
 
         } else
             usarPosion(this);
@@ -124,16 +131,19 @@ public class Personaje implements ILlevaArma {
         int choice = Teclado.nextInt();
         switch (choice) {
             case 1:
+                this.setArma(JuegoLOTR.inventario.get(0));
                 personajeAtacado.setSalud(personajeAtacado.getSalud() - this.getArma().getDanio());
                 System.out.println("¡Te clavé un Anduril Mágico!");
                 break;
 
             case 2:
+                this.setArma(JuegoLOTR.inventario.get(5));
                 personajeAtacado.setSalud(personajeAtacado.getSalud() - this.getArma().getDanio());
                 System.out.println("¡Te clavé un Sting Mágico!");
                 break;
 
             case 3:
+                this.setArma(JuegoLOTR.inventario.get(4));
                 personajeAtacado.setSalud(personajeAtacado.getSalud() - this.getArma().getDanio());
                 System.out.println("¡Te clavé una Espada!");
                 break;
@@ -146,9 +156,9 @@ public class Personaje implements ILlevaArma {
     }
 
     public void dispararFlecha(Personaje personajeAtacado) {
-        for (int flechas = 5; flechas < 1; flechas--) {
+        for (int flechas = 5; flechas > 1; flechas--) {
             personajeAtacado.setSalud(personajeAtacado.getSalud() - this.getArma().getDanio());
-            System.out.println("¡Justo en el blanco! Daño: 10, Stamina: 8. Te quedan " + flechas + "flechas por usar.");
+            System.out.println("¡Justo en el blanco! Daño: 2, Stamina: 1. Te quedan " + flechas + " " + "flechas por usar." + "Vida del atacado actual: " + personajeAtacado.getSalud());
 
         }
 
@@ -201,7 +211,7 @@ public class Personaje implements ILlevaArma {
     }
 
     public void usarPosionStamina(Personaje atacante) {
-        int usoPosion = atacante.getStamina() + 50;
+        int usoPosion = atacante.getStamina() + 30;
         atacante.setStamina(usoPosion);
     }
 
@@ -239,5 +249,7 @@ public class Personaje implements ILlevaArma {
 
         System.out.println(" Tu arma es: " + this.getArma().getNombre());
     }
+
+	
 
 }

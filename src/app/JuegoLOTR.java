@@ -67,7 +67,7 @@ public class JuegoLOTR {
 
         Anduril anduril = new Anduril("Anduril", 25, 15, 15);
         inventario.add(anduril);
-        ArcoYFlecha arcoYFlecha = new ArcoYFlecha("Arco y Flecha", 10, 8);
+        ArcoYFlecha arcoYFlecha = new ArcoYFlecha("Arco y Flecha", 2, 1);
         inventario.add(arcoYFlecha);
         Baculo baculo = new Baculo("Baculo", 50, 30, 50);
         inventario.add(baculo);
@@ -259,8 +259,9 @@ public class JuegoLOTR {
     }
 
     public JuegoLOTR iniciarCombate(Personaje player1, Personaje player2) {
-
+        System.out.println();
         System.out.println("Inicia el combate");
+        System.out.println();
         Personaje ganadorCombate;
         String color;
         boolean turnoPlayer1 = true;
@@ -288,25 +289,20 @@ public class JuegoLOTR {
             atacado = turnoPlayer1 ? player2 : player1;
 
             System.out.println(color + "Ataca: " + atacante.getNombre() + " y tiene una vida de: " + atacante.getSalud()
-                    + " y una stamina de: " + atacante.getStamina() + ANSI_RESET);
-
-                    /*
+                    + " y una stamina de: " + atacante.getStamina() + ANSI_RESET);                 
 
             if (atacante instanceof IHaceMagia && atacante instanceof ILlevaReliquia) {
                 // entran los Elfos y Wizard, usan magia
-                eligeAtaqueMagico(atacado, atacante);
-                
+                eligeAtaqueMagico(atacado, atacante);               
 
             } else if (atacante instanceof ILlevaReliquia) {
                 // entran los Humanos y los Hobbit, no usan magia
                 System.out.println("Soy un personaje con reliquia");
                 eligeAtaqueReliquia(atacado, atacante);      
                 
-                */
-
-            if (atacante.getStamina() > atacante.getArma().getStamina()) {
-                // Entran los Orcos, Goblin, Ennano, Troll
-                // elegirArma(atacante, atacado);
+            } else if (atacante.getStamina() > atacante.getArma().getStamina()) {
+                // Entran los Orcos, Goblin, Ennano, Troll                
+                eligeAtaqueSencillo(atacante, atacado);
 
             } else if (atacante.getStamina() < atacante.getArma().getStamina()) {
                 atacante.usarPosionStamina(atacante);
@@ -476,28 +472,32 @@ public class JuegoLOTR {
     }
 */
     public static void elegirArma(Personaje atacante, Personaje atacado) {
-        int choice = Teclado.nextInt();
         System.out.println("Elija un arma");
         System.out.println("1. Espada (Anduril, Sting o Espada común)");
         System.out.println("2. Arco y flecha");
         System.out.println("3. Baculo");
         System.out.println("4. Hacha doble");
+        int choice = Teclado.nextInt();
+
 
         switch (choice) {
             case 1:
-                System.out.println("Seleccionando Anduril... loading...");
+                System.out.println("Seleccionando Espada... loading...");
                 atacante.clavarEspada(atacado);
                 break;
             case 2:
                 System.out.println("Seleccionando Arco y flecha... loading");
+                atacante.setArma(inventario.get(1));
                 atacante.dispararFlecha(atacado);
                 break;
             case 3:
                 System.out.println("Seleccionando Baculo... loading");
+                atacante.setArma(inventario.get(2));
                 atacante.usarBaculo(atacado);
                 break;
             case 4:
                 System.out.println("Seleccionando Hacha doble... loading");
+                atacante.setArma(inventario.get(4));
                 atacante.clavarHacha(atacado);
                 break;
             default:
@@ -535,8 +535,8 @@ public class JuegoLOTR {
 
         System.out.println("Seleccionar que ataque quiere ejecutar: ");
         System.out.println();
-        System.out.println("1. Ataque de hielo");
-        System.out.println("2. Ataque con Ojo Sauron");
+        System.out.println("1. Deseas cambiar de arma y atacar?");
+        System.out.println("2. Ataque Epico");
         System.out.println("3. Invocar a Ulmo");
         System.out.println("4. Despiadado");
 
@@ -544,29 +544,24 @@ public class JuegoLOTR {
 
         switch (respuesta) {
             case 1:
-                ((IHaceMagia) atacante).ataqueEpicoPoderoso(atacado);   
+                elegirArma(atacante, atacado);
                 break;
             case 2:
-                (atacante).atacarConOjoSauron(atacado);;
+                ((IHaceMagia) atacante).ataqueEpicoPoderoso(atacado);                 
                 break;
             case 3:
-
-                
+                atacante.atacar(atacado);                
                 break;
             case 4:
-                
+                atacante.atacar(atacado);
                 break;
-        
             default:
+                System.out.println("Elige la opcion correcta!!");
+                eligeAtaqueMagico(atacado, atacante);
                 break;
         }
 
 
-
-    }
-
-    public void usoHielo(Personaje atacado) {
-        
 
     }
 
@@ -574,38 +569,39 @@ public class JuegoLOTR {
 
         System.out.println("Seleccionar que ataque quiere ejecutar: ");
         System.out.println();
-        System.out.println("1. Invocacion de Nazgul");
-        System.out.println("2. Ataque Multiples flechas");
-        System.out.println("3. Ataque anillo poderoso");
-        System.out.println("4. Ataque ayuda de Smeagol");
+        System.out.println("1. Deseas cambiar de arma y atacar?");
+        System.out.println("2. Ataque anillo poderoso");
+        System.out.println("3. Ataque ayuda de Smeagol");
+        System.out.println("4. Invocacion de Nazgul");
 
         int respuesta = Teclado.nextInt();
 
         switch (respuesta) {
             case 1:                
-                atacante.atacarConOjoSauron(atacado);  
+                elegirArma(atacante, atacado); 
                 break;
             case 2:
-                
+                atacante.atacar(atacado);
                 break;
             case 3:
-                
+                atacante.atacar(atacado);    
                 break;
             case 4:
-                
-                break;
-        
+                atacante.atacar(atacado);    
+                break;       
             default:
+                System.out.println("Elige la opcion correcta!!");
+                eligeAtaqueReliquia(atacado, atacante);
                 break;
         }
 
     }
 
-    public void eligeAtaqueSencillo() {
+    public void eligeAtaqueSencillo(Personaje atacado, Personaje atacante) {
 
         System.out.println("Seleccionar que ataque quiere ejecutar: ");
         System.out.println();
-        System.out.println("1. Ataque tirar Roca");
+        System.out.println("1. Deseas cambiar de arma y atacar?");
         System.out.println("2. Ataque adsorber energia");
         System.out.println("3. Ataque Bruto");
         System.out.println("4. Ataque especial");
@@ -614,19 +610,20 @@ public class JuegoLOTR {
 
         switch (respuesta) {
             case 1:
-                
+                elegirArma(atacante, atacado);                   
                 break;
             case 2:
-                
+                atacante.atacar(atacado);    
                 break;
             case 3:
-                
+                atacante.atacar(atacado);   
                 break;
             case 4:
-                
+                atacante.atacar(atacado);
                 break;
-        
             default:
+                System.out.println("Elige la opcion correcta!!");
+                eligeAtaqueSencillo(atacado, atacante);
                 break;
         }
 

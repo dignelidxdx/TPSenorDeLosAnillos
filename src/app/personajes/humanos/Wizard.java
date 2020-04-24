@@ -95,14 +95,12 @@ public class Wizard extends Humano implements IHaceMagia {
             vidaActual = (int) (personaje.getSalud() - (this.getArma().getDanio() * (this.getReliquia().getFactorDeAtaque() + 1)));
             personaje.setSalud(vidaActual);
 
-            int staminaRestante = this.getStamina() - 10;
-            this.setStamina(staminaRestante);
+            this.setStamina(this.getStamina() - 10);
 
-            int magiaRestante = this.getEnergiaMagica() - 5;
-            this.setEnergiaMagica(magiaRestante);
+            this.setEnergiaMagica(this.getEnergiaMagica() - 5);
 
             System.out.println("Ejecute un ataque epico a: " + personaje.getNombre() + " y quedo con vida: " 
-            + personaje.getSalud() + " Soy un wizard feliz");
+            + personaje.getSalud() + ". Soy un wizard Poderoso!");
 
         } else System.out.println("Uhh no tienes magia o stamina!!");
     }
@@ -125,8 +123,7 @@ public class Wizard extends Humano implements IHaceMagia {
     public void seleccionReliquiaPrincipal() {
         System.out.println("Selecciona tu reliquia " + this.getNombre());
         int respuesta = JuegoLOTR.elegirReliquia();
-        Reliquia reliquiaActual = JuegoLOTR.reliquias.get(respuesta - 1);
-        this.setReliquia(reliquiaActual);
+        this.setReliquia(JuegoLOTR.reliquias.get(respuesta - 1));
 
         System.out.println(" Tu reliquia es: " + this.getReliquia().getNombre());
     }

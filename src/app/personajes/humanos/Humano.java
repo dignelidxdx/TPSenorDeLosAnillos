@@ -62,9 +62,8 @@ public class Humano extends Personaje implements ILlevaReliquia {
 
     public void seleccionReliquiaPrincipal() {
         System.out.println("Selecciona tu reliquia " + this.getNombre());
-        int respuesta= JuegoLOTR.elegirReliquia();
-        Reliquia reliquiaActual = JuegoLOTR.reliquias.get(respuesta - 1);
-        this.setReliquia(reliquiaActual);
+        int respuesta = JuegoLOTR.elegirReliquia();
+        this.setReliquia(JuegoLOTR.reliquias.get(respuesta - 1));
 
         System.out.println(" Tu reliquia es: " + this.getReliquia().getNombre());
     }
