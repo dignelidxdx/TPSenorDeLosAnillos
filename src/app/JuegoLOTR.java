@@ -23,12 +23,12 @@ import app.personajes.criaturas.Orco;
 import app.personajes.humanos.Humano;
 import app.personajes.humanos.Wizard;
 import app.reliquias.Reliquia;
-import app.reliquias.reliquiasanillos.AnilloElfico;
 import app.reliquias.reliquiasanillos.AnilloNarya;
+import app.reliquias.reliquiasanillos.AnilloNenya;
 import app.reliquias.reliquiasanillos.AnilloUnico;
+import app.reliquias.reliquiasanillos.AnilloVilya;
 import app.reliquias.reliquiasfisicas.ChalecoDeMithril;
-
-
+import app.reliquias.reliquiasjoyas.FrascoGaladriel;
 
 
 public class JuegoLOTR {
@@ -50,15 +50,18 @@ public class JuegoLOTR {
     public static ArrayList<Reliquia> listaReliquias() {
         ArrayList<Reliquia> reliquias = new ArrayList<>();
 
-        
-       
-
-
-
-
-        
-
-
+        AnilloNenya nenya = new AnilloNenya("Anillo Nenya", +0.03, +0.30, +40, 0);
+        reliquias.add(nenya);
+        AnilloNarya narya = new AnilloNarya("Anillo Narya", +0.15, +0.03, +15, 0);
+        reliquias.add(narya);
+        AnilloVilya vilya = new AnilloVilya("Anillo Vilya", +0.05, +0.15, +10, +0.15);
+        reliquias.add(vilya);
+        AnilloUnico sauron = new AnilloUnico();
+        reliquias.add(sauron);
+        FrascoGaladriel frascoDeGaladriel = new FrascoGaladriel();
+        reliquias.add(frascoDeGaladriel);
+        ChalecoDeMithril chaleco = new ChalecoDeMithril("Cota de malla de Mithril", 0, 0.50, "Tengo chaleco, viteh?!");
+        reliquias.add(chaleco);
 
         return reliquias;
     }
