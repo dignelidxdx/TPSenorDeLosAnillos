@@ -22,6 +22,18 @@ public class Baculo extends Arma implements IEsMagico{
 
     }
 
+    @Override
+    public int getConsumo() {
+        
+        return 0;
+    }
+
+    @Override
+    public void setConsumo(int consumo) {
+        
+
+    }
+
    
 
 }

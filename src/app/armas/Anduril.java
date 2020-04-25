@@ -28,5 +28,17 @@ public class Anduril extends Espada implements IEsMagico {
         super(nombre, danio, stamina);
     }
 
+    @Override
+    public int getConsumo() {
+      
+        return 0;
+    }
+
+    @Override
+    public void setConsumo(int consumo) {
+        
+
+    }
+
     
 }
