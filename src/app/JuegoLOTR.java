@@ -50,12 +50,16 @@ public class JuegoLOTR {
     public static ArrayList<Reliquia> listaReliquias() {
         ArrayList<Reliquia> reliquias = new ArrayList<>();
 
+        
        
 
 
 
 
         
+
+
+
         return reliquias;
     }
 
