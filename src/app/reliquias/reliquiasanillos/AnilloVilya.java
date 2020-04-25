@@ -23,24 +23,53 @@ public class AnilloVilya extends AnilloElfico {
 
     private double ataqueEPICOVilya;
 
+    @Override
     public double setAtaqueEPICOVilya() {
         return ataqueEPICOVilya;
     }
 
+    @Override
     public void getAtaqueEPICOVilya(double ataqueEPICOVilya) {
         this.ataqueEPICOVilya = ataqueEPICOVilya;
     }
 
     private int danioViento;
 
+    @Override
     public int getDanioViento() {
         return danioViento;
     }
 
+    @Override
     public void setDanioViento(int danioViento) {
         this.danioViento = 15;
     }
 
+    private int vendaval;
+
+    @Override
+    public int getVendaval() {
+        return vendaval;
+    }
+
+    @Override
+    public void setVendaval(int vendaval) {
+        this.vendaval = vendaval;
+    }
+
+    private int consumo;
+
+    @Override
+    public int getConsumo() {
+        return consumo;
+    }
+
+    @Override
+    public void setConsumo(int consumo) {
+        this.consumo = consumo;
+    }
+    
+    @Override
     public void invocarManwe(Personaje personaje, Personaje otroPersonaje, Reliquia reliquia, Arma arma, Scanner Teclado) {
         
         
@@ -58,7 +87,14 @@ public class AnilloVilya extends AnilloElfico {
 
             personaje.setDanioDeAtaque((int) ataqueEPICOVilya);
 
+            setVendaval(otroPersonaje.getArma().getStamina() + this.getDanioViento());
 
+            otroPersonaje.getArma().setStamina(getVendaval());
+
+            setConsumo(((IHaceMagia) personaje).getEnergiaMagica() - 70);       
+              
+            ((IHaceMagia) personaje).setEnergiaMagica(getConsumo());
+        }
             
             
 

@@ -171,4 +171,16 @@ public class AnilloDePoder extends Reliquia implements IEsMagico, ISonAnillos {
         
 
     }
+
+    @Override
+    public int getConsumo() {
+        
+        return 0;
+    }
+
+    @Override
+    public void setConsumo(int consumo) {
+        
+
+    }
 }
